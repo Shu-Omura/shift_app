@@ -1,0 +1,14 @@
+inherit_from:
+  - .rubocop_airbnb.yml
+  - .rubocop_todo.yml
+
+AllCops:
+  TargetRubyVersion: 2.7.1
+  Exclude:
+    - 'db/**/*'
+    - 'vendor/**/*'
+    - 'bin/*'
+    - 'node_modules/**/*'
+
+Metrics/LineLength:
+  Max: 120
