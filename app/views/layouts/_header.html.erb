@@ -1,5 +1,6 @@
 <header>
   <nav>
+    <%= link_to 'トップ', root_path %>
     <% if user_signed_in? %>
       <%= link_to 'ログアウト', sign_out_path %>
     <% else %>
