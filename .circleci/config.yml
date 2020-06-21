@@ -1,7 +1,100 @@
 version: 2.1
 
+executors:
+  default:
+    docker:
+      - image: circleci/ruby:2.7.1-node-browsers-legacy
+        environment: 
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          DATABASE_URL: postgres://postgres:password@localhost:5432/shuapp_test
+          RAILS_ENV: test
+      - image: circleci/postgres
+        environment:
+          POSTGRES_PASSWORD: password
+
+commands:
+  configure_bundle:
+    steps:
+      - run:
+          name: Configure Bundler
+          command: |
+            gem update --system
+            gem install bundler
+
+  bundle_with_cache:
+    steps:
+      - restore_cache:
+          keys:
+            - shuapp-bundle-{{ checksum "Gemfile.lock" }}
+            - shuapp-bundle-
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install --jobs=8 --clean
+      - save_cache:
+          key: shuapp-bundle-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+  
+  yarn_with_cache:
+    steps:
+      - restore_cache:
+          keys:
+            - shuapp-yarn-{{ checksum "yarn.lock" }}
+            - shuapp-yarn-
+      - run:
+          name: Yarn Install
+          command: yarn install --cache-folder ~/.cache/yarn
+      - save_cache:
+          key: shuapp-yarn-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+  run_rubocop:
+    steps:
+      - run: 
+          name: Make a file for rubocop
+          command: touch .rubocop_todo.yml
+      - run:
+          name: Run rubocop
+          command: bundle exec rubocop --parallel
+      - run: 
+          name: Remove a file for rubocop
+          command: rm .rubocop_todo.yml
+
 jobs:
   build:
+    executor: default
+    steps:
+      - checkout
+      - configure_bundle
+      - bundle_with_cache
+      - yarn_with_cache
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://127.0.0.1:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: bin/rails db:create db:schema:load --trace
+  rspec:
+    executor: default
+    steps:
+      - checkout
+      - configure_bundle
+      - bundle_with_cache
+      - run:
+          name: Run rspec
+          command: |
+            bundle exec rspec
+
+  rubocop:
+    executor: default
+    steps:
+      - checkout
+      - configure_bundle
+      - bundle_with_cache
+      - run_rubocop
+
+  deploy:
     docker:
       - image: sue445/heroku-cli
     steps:
@@ -10,7 +103,7 @@ jobs:
       - jq/install
       - run:
           name: Deploy
-          command: git push https://heroku:c384c77c-1e33-4d3e-b0ff-41dbcac335d0@git.heroku.com/app-shift-pote-2020.git develop:master
+          command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git develop:master
       - run:
           name: Run post-deploy tasks
           command: |
@@ -19,3 +112,18 @@ jobs:
 orbs:
   build-tools: circleci/build-tools@2.6.3
   jq: circleci/jq@1.9.1
+workflows:
+  version: 2.1
+  build_test_and_deploy:
+    jobs:
+      - build
+      - rspec:
+          requires:
+            - build
+      - rubocop:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - rspec
+            - rubocop
