@@ -62,8 +62,8 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  host = 'app-shift-2020.herokuapp.com'
-  config.action_mailer.default_url_options = { protocol: 'https', host: host }
+  host = 'app-shift-pote-2020.herokuapp.com'
+  config.action_mailer.default_url_options = { host: host }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   # Sendgrid for heroku
