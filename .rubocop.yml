@@ -12,3 +12,7 @@ AllCops:
 
 Metrics/LineLength:
   Max: 120
+
+Lint/UselessAssignment:
+  Exclude:
+    - 'spec/models/user_spec.rb'
