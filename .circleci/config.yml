@@ -62,34 +62,11 @@ jobs:
       - run:
           name: Database setup
           command: bin/rails db:create db:schema:load --trace
-  rspec:
-    executor: default
-    steps:
-      - checkout
-      - configure_bundle
-      - bundle_with_cache
       - run:
           name: Run rspec
           command: |
             bundle exec rspec
-  rubocop:
-    executor: default
-    steps:
-      - checkout
-      - configure_bundle
-      - bundle_with_cache
       - run:
           name: Run rubocop
           command: bundle exec rubocop --parallel
 
-workflows:
-  version: 2.1
-  build_and_test:
-    jobs:
-      - build
-      - rspec:
-          requires:
-            - build
-      - rubocop:
-          requires:
-            - build
