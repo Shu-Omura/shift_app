@@ -72,5 +72,4 @@ yarn-debug.log*
 /storage/*
 !/storage/.keep
 
-.rubocop_todo.yml
 # End of https://www.toptal.com/developers/gitignore/api/rails

@@ -21,7 +21,6 @@ commands:
           command: |
             gem update --system
             gem install bundler
-
   bundle_with_cache:
     steps:
       - restore_cache:
@@ -35,7 +34,6 @@ commands:
           key: shuapp-bundle-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
-  
   yarn_with_cache:
     steps:
       - restore_cache:
@@ -49,17 +47,6 @@ commands:
           key: shuapp-yarn-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
-  run_rubocop:
-    steps:
-      - run: 
-          name: Make a file for rubocop
-          command: touch .rubocop_todo.yml
-      - run:
-          name: Run rubocop
-          command: bundle exec rubocop --parallel
-      - run: 
-          name: Remove a file for rubocop
-          command: rm .rubocop_todo.yml
 
 jobs:
   build:
@@ -85,36 +72,19 @@ jobs:
           name: Run rspec
           command: |
             bundle exec rspec
-
   rubocop:
     executor: default
     steps:
       - checkout
       - configure_bundle
       - bundle_with_cache
-      - run_rubocop
-
-  deploy:
-    docker:
-      - image: sue445/heroku-cli
-    steps:
-      - checkout
-      - build-tools/install-ci-tools
-      - jq/install
       - run:
-          name: Deploy
-          command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git develop:master
-      - run:
-          name: Run post-deploy tasks
-          command: |
-            heroku run bin/rails db:migrate
+          name: Run rubocop
+          command: bundle exec rubocop --parallel
 
-orbs:
-  build-tools: circleci/build-tools@2.6.3
-  jq: circleci/jq@1.9.1
 workflows:
   version: 2.1
-  build_test_and_deploy:
+  build_and_test:
     jobs:
       - build
       - rspec:
@@ -123,7 +93,3 @@ workflows:
       - rubocop:
           requires:
             - build
-      - deploy:
-          requires:
-            - rspec
-            - rubocop
