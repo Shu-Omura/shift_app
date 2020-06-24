@@ -1,30 +1,45 @@
-// Place all the styles related to the statics controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
-
 // top
 .top-page {
-  border-top: 1px solid rgb(200, 200, 200);
+  background-image: url('clocks.jpg');
+  .top-form {
+    box-shadow: 5px 5px 15px gray;
+    margin-top: 180px;
+    padding: 40px 20px 60px 20px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    .signin {
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: rgb(255, 255, 255);
+      background-color: rgba(167, 167, 167, 0.9);
+    }
+    .signup {
+      font-weight: bold;
+      color: rgb(255, 255, 255);
+      background-color: #4885ed;
+    }
+  }
+}
+
+// top, registration, session, password
+.main-section {
   border-bottom: 1px solid rgb(200, 200, 200);
   text-align: center;
   height: 600px;
   background-color:rgb(247, 247, 247);
   .main-area {
-    margin-top: 130px;
+    margin-top: 160px;
     .main-image {
       width: 70%;
       height: 70%;
     }
   }
-  .registration-area {
-    margin-top: 50px;
-    height: 450px;
+  .form-area {
+    margin-top: 80px;
+    height: 80%;
     background-color: rgb(255,255,255);
     border: 1px solid rgb(200, 200, 200);
     border-radius: 6px;
     box-shadow: 5px 5px 15px gray;
-    li {
-      list-style: none;
-    }
   }
 }

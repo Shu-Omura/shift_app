@@ -1,10 +1,7 @@
-<div class="container-fluid top-page">
-  <div class="col-md-6 col-md-offset-1 main-area">
-    <%= image_tag "main.png", class: "main-image" %>
-  </div>
-  <div class="col-md-4 registration-area">
-    <h1>ログイン</h1>
-    <%= render 'shared/registrations_new' %>
-    <%= render 'shared/sessions_new' %>
+<div class="container-fluid main-section top-page">
+  <div class="col-md-4 col-md-offset-7 top-form">
+    <h2><strong>効率的なシフト管理をお手軽に。</strong></h2>
+    <%= link_to 'ログイン', new_user_session_path, class: 'form-control btn signin' %>
+    <%= link_to '新規登録', new_user_registration_path, class: 'form-control btn signup' %>
   </div>
 </div>

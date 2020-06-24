@@ -1,0 +1,19 @@
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "users/shared/error_messages", resource: resource %>
+
+  <div class="field form-group">
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class: "form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード", class: "form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード再入力", class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "サインアップ", class:"form-control btn btn-primary" %>
+  </div>
+<% end %>
