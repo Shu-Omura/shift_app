@@ -1,2 +1,10 @@
-<h1>Statics#top</h1>
-<p>Find me in app/views/statics/top.html.erb</p>
+<div class="container-fluid top-page">
+  <div class="col-md-6 col-md-offset-1 main-area">
+    <%= image_tag "main.png", class: "main-image" %>
+  </div>
+  <div class="col-md-4 registration-area">
+    <h1>ログイン</h1>
+    <%= render 'shared/registrations_new' %>
+    <%= render 'shared/sessions_new' %>
+  </div>
+</div>

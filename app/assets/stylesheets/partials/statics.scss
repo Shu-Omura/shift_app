@@ -1,0 +1,30 @@
+// Place all the styles related to the statics controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+// top
+.top-page {
+  border-top: 1px solid rgb(200, 200, 200);
+  border-bottom: 1px solid rgb(200, 200, 200);
+  text-align: center;
+  height: 600px;
+  background-color:rgb(247, 247, 247);
+  .main-area {
+    margin-top: 130px;
+    .main-image {
+      width: 70%;
+      height: 70%;
+    }
+  }
+  .registration-area {
+    margin-top: 50px;
+    height: 450px;
+    background-color: rgb(255,255,255);
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 6px;
+    box-shadow: 5px 5px 15px gray;
+    li {
+      list-style: none;
+    }
+  }
+}
