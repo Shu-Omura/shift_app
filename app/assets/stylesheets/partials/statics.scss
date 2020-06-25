@@ -42,4 +42,26 @@
     border-radius: 6px;
     box-shadow: 5px 5px 15px gray;
   }
+  .sns-form {
+    margin-top: 30px;
+    border-top: 2px solid rgb(200, 200, 200);
+    .facebook {
+      margin-top: 20px; 
+      background-color: #3b5998;
+      color: rgb(255,255,255);
+      font-weight: bold;
+      &:hover {
+        background-color: #1c3364;
+      }
+    }
+    .google {
+      border: 1px solid rgb(200, 200, 200);
+      &:hover {
+        border: 1px solid grey;
+      }
+    }
+    .icon {
+      padding-right: 10px;
+    }
+  }
 }
