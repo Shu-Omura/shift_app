@@ -1,8 +1,9 @@
 <div class="container-fluid main-section top-page">
+  <%= render 'shared/flash' %>
   <div class="col-md-4 col-md-offset-7 top-form">
     <h2><strong>効率的なシフト管理をお手軽に。</strong></h2>
     <% if user_signed_in? %>
-      <%= link_to 'マイページ', users_path(current_user), class: 'form-control btn btn light' %>
+      <%= link_to 'マイページ', user_path(current_user), class: 'form-control btn btn light' %>
     <% else %>
       <%= link_to 'ログイン', new_user_session_path, class: 'form-control btn dark' %>
       <%= link_to '新規登録', new_user_registration_path, class: 'form-control btn light' %>

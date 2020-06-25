@@ -2,6 +2,10 @@
   <%= render "users/shared/error_messages", resource: resource %>
 
   <div class="field form-group">
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ユーザー名", class: "form-control" %>
+  </div>
+
+  <div class="field form-group">
     <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class: "form-control" %>
   </div>
 
