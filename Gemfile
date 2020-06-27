@@ -5,6 +5,14 @@ ruby '2.7.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
+gem 'devise', '~> 4.7', '>= 4.7.2'
+gem 'omniauth-facebook', '~> 6.0'
+gem 'omniauth-google-oauth2', '~> 0.8.0'
+gem 'devise-i18n', '~> 1.9', '>= 1.9.1'
+gem 'devise-i18n-views', '~> 0.3.7'
+gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
+gem 'jquery-rails', '~> 4.4'
+gem 'rails-i18n', '~> 6.0'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
@@ -31,7 +39,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails', '~> 3.4'
+  gem 'rspec-rails', '~> 4.0', '>= 4.0.1'
+  gem 'factory_bot_rails', '~> 6.0'
 end
 
 group :development do

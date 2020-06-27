@@ -1,0 +1,11 @@
+<div class="container-fluid main-section">
+  <div class="col-md-6 col-md-offset-1 main-area">
+    <%= image_tag "main.png", class: "main-image" %>
+  </div>
+  <div class="col-md-4 form-area">
+    <h4><strong>新規登録</strong></h4>
+    <%= render 'registration_form' %>
+    <%= render 'shared/sns_registration' %>
+    <%= link_to 'すでにアカウントをお持ちですか？', new_user_session_path %>
+  </div>
+</div>

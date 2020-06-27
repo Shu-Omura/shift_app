@@ -3,7 +3,7 @@ inherit_from:
   - .rubocop_todo.yml
 
 AllCops:
-  TargetRubyVersion: 2.7.1
+  TargetRubyVersion: 2.7
   Exclude:
     - 'db/**/*'
     - 'vendor/**/*'
@@ -12,3 +12,7 @@ AllCops:
 
 Metrics/LineLength:
   Max: 120
+
+Lint/UselessAssignment:
+  Exclude:
+    - 'spec/models/user_spec.rb'

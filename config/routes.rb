@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
-  root 'users#show'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root 'statics#top'
+  devise_for :users, controllers: {
+    confirmations: 'users/confirmations',
+    registrations: 'users/registrations',
+    sessions: 'users/sessions',
+    passwords: 'users/passwords',
+    omniauth_callbacks: 'users/omniauth_callbacks',
+  }
+  resources :users, only: [:show, :index]
 end

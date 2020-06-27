@@ -1,0 +1,67 @@
+// top
+.top-page {
+  background-image: url('clocks.jpg');
+  .top-form {
+    box-shadow: 5px 5px 15px gray;
+    margin-top: 180px;
+    padding: 40px 20px 60px 20px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    .dark {
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: rgb(255, 255, 255);
+      background-color: rgba(167, 167, 167, 0.9);
+    }
+    .light {
+      font-weight: bold;
+      color: rgb(255, 255, 255);
+      background-color: #4885ed;
+    }
+  }
+}
+
+// top, registration, session, password
+.main-section {
+  border-bottom: 1px solid rgb(200, 200, 200);
+  text-align: center;
+  height: 600px;
+  background-color:rgb(247, 247, 247);
+  .main-area {
+    margin-top: 160px;
+    .main-image {
+      width: 70%;
+      height: 70%;
+    }
+  }
+  .form-area {
+    margin-top: 80px;
+    height: 80%;
+    background-color: rgb(255,255,255);
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 6px;
+    box-shadow: 5px 5px 15px gray;
+  }
+  .sns-form {
+    margin-top: 30px;
+    border-top: 2px solid rgb(200, 200, 200);
+    .facebook {
+      margin-top: 20px; 
+      background-color: #3b5998;
+      color: rgb(255,255,255);
+      font-weight: bold;
+      &:hover {
+        background-color: #1c3364;
+      }
+    }
+    .google {
+      border: 1px solid rgb(200, 200, 200);
+      &:hover {
+        border: 1px solid grey;
+      }
+    }
+    .icon {
+      padding-right: 10px;
+    }
+  }
+}
