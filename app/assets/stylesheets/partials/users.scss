@@ -7,3 +7,27 @@
   border-radius: 6px;
   box-shadow: 5px 5px 15px gray;
 }
+
+// registration/edit
+.profile {
+  .link {
+    margin-top: 120px;
+    text-align: left;
+  }
+  .update-profile {
+    text-align: left;
+    h1 {
+      font-weight: bold;
+      padding: 30px 0px;
+      margin-bottom: 40px;
+      border-bottom: 2px solid rgb(170, 170, 170);
+    }
+    h4 {
+      padding: 0;
+      margin: 0;
+    }
+    p {
+      padding: 5px 0;
+    }
+  }
+}

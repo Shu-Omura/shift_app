@@ -19,7 +19,7 @@ RSpec.describe "Users", type: :request do
       end
     end
 
-    context "as gest" do
+    context "as guest" do
       it "redirects to /sign_in" do
         get users_path
         expect(response).to redirect_to new_user_session_path
@@ -42,7 +42,7 @@ RSpec.describe "Users", type: :request do
       end
     end
 
-    context "as gest" do
+    context "as guest" do
       it "redirects to /sign_in" do
         get user_path(user)
         expect(response).to redirect_to new_user_session_path
@@ -55,7 +55,7 @@ RSpec.describe "Users", type: :request do
       it "redirects to /" do
         sign_in user
         get new_user_registration_path
-        expect(response).to redirect_to root_url
+        expect(response).to redirect_to user_path(user)
       end
     end
 
@@ -84,7 +84,7 @@ RSpec.describe "Users", type: :request do
       end
     end
 
-    context "as gest" do
+    context "as guest" do
       it "redirects to /" do
         get edit_user_registration_path
         expect(response).to redirect_to new_user_session_path
