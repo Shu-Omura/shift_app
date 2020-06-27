@@ -8,8 +8,11 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 gem 'devise', '~> 4.7', '>= 4.7.2'
 gem 'omniauth-facebook', '~> 6.0'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
+gem 'devise-i18n', '~> 1.9', '>= 1.9.1'
+gem 'devise-i18n-views', '~> 0.3.7'
 gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 gem 'jquery-rails', '~> 4.4'
+gem 'rails-i18n', '~> 6.0'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server

@@ -104,7 +104,7 @@ RSpec.describe "Users", type: :request do
 
       it "shows error messages" do
         post user_registration_path, params: { user: invalid_user_params }
-        expect(response.body).to include "Name can&#39;t be blank"
+        expect(response.body).to include "名前を入力してください"
       end
     end
   end
@@ -170,7 +170,7 @@ RSpec.describe "Users", type: :request do
         end
 
         it "shows error messages" do
-          expect(response.body).to include "Current password can&#39;t be blank"
+          expect(response.body).to include "現在のパスワードを入力してください"
         end
       end
     end
@@ -211,7 +211,7 @@ RSpec.describe "Users", type: :request do
         end
 
         it "shows error messages" do
-          expect(response.body).to include "Current password can&#39;t be blank"
+          expect(response.body).to include "現在のパスワードを入力してください"
         end
       end
     end
