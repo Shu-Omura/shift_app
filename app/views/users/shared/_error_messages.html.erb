@@ -1,16 +1,7 @@
 <% if resource.errors.any? %>
   <div id="error_explanation" class="alert alert-danger">
-    <li class="dropdown">
-      <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-        <span>エラーが発生しました。</span>
-      <span class="caret"></span></a>
-      <ul class="dropdown-menu">
-        <ul>
-          <% resource.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </ul>
-    </li>
+    <% resource.errors.full_messages.each do |message| %>
+      <%= message %></br>
+    <% end %>
   </div>
 <% end %>
