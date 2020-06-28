@@ -6,6 +6,6 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @users = User.where(company_id: current_user.company_id)
   end
 end
