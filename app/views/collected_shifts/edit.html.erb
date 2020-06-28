@@ -1,2 +1,13 @@
 <h1>CollectedShifts#edit</h1>
-<p>Find me in app/views/collected_shifts/edit.html.erb</p>
+
+<%= form_with(model: @collected_shift, local: true) do |f| %>
+  <%= f.label :started_at, class: 'form-group' %>
+  <%= f.datetime_select :started_at, class: 'form-control' %>
+
+  <%= f.label :finished_at, class: 'form-group' %>
+  <%= f.datetime_select :finished_at, class: 'form-control' %>
+
+  <%= f.submit '変更を保存する', class: 'btn btn-default' %>
+<% end %>
+
+<%= link_to '削除する', collected_shift_path(@collected_shift), method: :delete, data: { confirm: '削除してよろしいですか' } %>

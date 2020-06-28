@@ -1,2 +1,11 @@
 <h1>CollectedShifts#new</h1>
-<p>Find me in app/views/collected_shifts/new.html.erb</p>
+
+<%= form_with(model: @collected_shift, local: true) do |f| %>
+  <%= f.label :started_at, class: 'form-group' %>
+  <%= f.datetime_select :started_at, class: 'form-control' %>
+
+  <%= f.label :finished_at, class: 'form-group' %>
+  <%= f.datetime_select :finished_at, class: 'form-control' %>
+
+  <%= f.submit '提出する', class: 'btn btn-default' %>
+<% end %>

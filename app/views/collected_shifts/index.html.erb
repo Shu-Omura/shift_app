@@ -8,12 +8,3 @@
       </li>
     <% end %>
   <% end %>
-<h2>私のシフト</h2>
-<% @collected_user_shifts.each do |shift| %>
-  <%= link_to collected_shift_path(shift) do %>
-  <li>
-    <%= shift.started_at %>
-    <%= shift.finished_at %>
-  </li>
-  <% end %>
-<% end %>

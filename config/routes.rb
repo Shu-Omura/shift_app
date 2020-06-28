@@ -8,5 +8,5 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks',
   }
   resources :users, only: [:show, :index]
-  resources :collected_shifts
+  resources :collected_shifts, except: [:show]
 end

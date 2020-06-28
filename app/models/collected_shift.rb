@@ -1,5 +1,5 @@
 class CollectedShift < ApplicationRecord
-  belongs_to :user, dependent: :destroy
+  belongs_to :user
   validates_presence_of :started_at
   validates_presence_of :finished_at
   validate :validates_datetime
