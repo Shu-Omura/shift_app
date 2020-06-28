@@ -1,0 +1,2 @@
+module CollectedShiftsHelper
+end

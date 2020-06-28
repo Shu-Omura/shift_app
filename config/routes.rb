@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'collected_shifts/index'
+  get 'collected_shifts/show'
+  get 'collected_shifts/new'
+  get 'collected_shifts/edit'
   root 'statics#top'
   devise_for :users, controllers: {
     confirmations: 'users/confirmations',
