@@ -1,2 +1,19 @@
-<h1>CollectedShifts#index</h1>
-<p>Find me in app/views/collected_shifts/index.html.erb</p>
+<h2>会社全員のシフト</h2>
+  <% @users.each do |user| %>
+    <h2><%= user.email %>さんのシフト</h2>
+    <% user.collected_shifts.each do |shift| %>
+      <li>
+        <%= shift.started_at %>
+        <%= shift.finished_at %>
+      </li>
+    <% end %>
+  <% end %>
+<h2>私のシフト</h2>
+<% @collected_user_shifts.each do |shift| %>
+  <%= link_to collected_shift_path(shift) do %>
+  <li>
+    <%= shift.started_at %>
+    <%= shift.finished_at %>
+  </li>
+  <% end %>
+<% end %>
