@@ -20,7 +20,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
 
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
@@ -62,14 +62,14 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  host = 'app-shift-pote-2020.herokuapp.com'
+  host = "app-shift-pote-2020.herokuapp.com"
   config.action_mailer.default_url_options = { host: host }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   # Sendgrid for heroku
   config.action_mailer.smtp_settings = {
-    :address => 'smtp.sendgrid.net',
-    :domain => 'heroku.com',
+    :address => "smtp.sendgrid.net",
+    :domain => "heroku.com",
     :port => 587,
     :user_name => Rails.application.credentials.sendgrid_username,
     :password => Rails.application.credentials.sendgrid_password,
