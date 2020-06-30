@@ -1,5 +1,5 @@
-<div class="container-fluid main-section">
-  <div class="col-md-4 col-md-offset-4 password-form-area">
+<div class="main-wrapper">
+  <div class="col-md-4 col-md-offset-4 form-area">
     <h4><strong>パスワードをお忘れですか？</strong></h4>
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
       <%= render "users/shared/error_messages", resource: resource %>
@@ -9,7 +9,7 @@
       </div>
 
       <div class="actions">
-        <%= f.submit "送信", class: "form-control btn btn-primary" %>
+        <%= f.submit "送信", class: "form-control light" %>
       </div>
     <% end %>
     <%- if devise_mapping.registerable? && controller_name != 'registrations' %>

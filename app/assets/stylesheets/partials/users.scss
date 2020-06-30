@@ -1,33 +1,55 @@
-// password/new
-.password-form-area {
-  margin-top: 80px;
-  height: 60%;
-  background-color: rgb(255,255,255);
-  border: 1px solid rgb(200, 200, 200);
-  border-radius: 6px;
-  box-shadow: 5px 5px 15px gray;
+// registrations, sessions, passwords
+.main-wrapper{
+  img {
+    margin-top: 160px;
+    width: 70%;
+    height: 70%;
+  }
+  .form-area {
+    margin-top: 80px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 5px 5px 15px gray;
+  }
+  .oauth-form {
+    margin-top: 30px;
+    border-top: 2px solid rgb(200, 200, 200);
+    .facebook {
+      margin-top: 20px; 
+      background-color: rgb(59, 89, 152);
+      color: white;
+      font-weight: bold;
+      &:hover {
+        background-color: rgb(28, 51, 100);
+      }
+    }
+    .google {
+      border: 1px solid rgb(200, 200, 200);
+      &:hover {
+        border: 1px solid grey;
+      }
+    }
+    .icon {
+      padding-right: 10px;
+    }
+  }
 }
 
-// registration/edit
-.profile {
-  .link {
+// registrations#edit
+.profile-wrapper {
+  text-align: left;
+  .links {
     margin-top: 120px;
     text-align: left;
   }
-  .update-profile {
-    text-align: left;
-    h1 {
-      font-weight: bold;
-      padding: 30px 0px;
-      margin-bottom: 40px;
-      border-bottom: 2px solid rgb(170, 170, 170);
-    }
-    h4 {
-      padding: 0;
-      margin: 0;
-    }
-    p {
-      padding: 5px 0;
-    }
+  h1 {
+    margin-bottom: 40px;
+    padding: 30px 0px;
+    border-bottom: 2px solid rgb(170, 170, 170);
+    font-weight: bold;
+  }
+  h4 {
+    margin: 0;
   }
 }
