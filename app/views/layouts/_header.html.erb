@@ -17,8 +17,9 @@
             <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <% if user_signed_in? %>
-                <li><%= link_to 'マイアカウント', user_path(current_user) %></li>
                 <li><%= link_to 'スタッフ一覧', users_path %></li>
+                <li><%= link_to 'マイページ', user_path(current_user) %></li>
+                <li><%= link_to 'アカウント設定', edit_user_registration_path %></li>
                 <li class="divider"></li>
                 <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
               <% else %>

@@ -16,10 +16,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
   def edit
-    if params[:path].present?
-      return render "users/registrations/#{params[:path]}"
+    if params[:path]
+      render "users/registrations/#{params[:path]}"
     end
-    super
   end
 
   # PUT /resource
@@ -37,7 +36,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       clean_up_passwords resource
       set_minimum_password_length
-      if params[:path].present?
+      if params[:path]
         render "users/registrations/#{params[:path]}"
       else
         respond_with resource
