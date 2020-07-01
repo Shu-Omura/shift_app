@@ -1,5 +1,21 @@
-<h1>ユーザー一覧</h1>
-<% @users.each do |user| %>
-  <%= user.name %>
-  <%= user.email %>
-<% end %>
+<div class="col-md-10 col-md-offset-1">
+  <table>
+    <caption>スタッフ一覧</caption>
+    <tr>
+      <th>スタッフ名</th>
+      <th>アドレス</th>
+      <th>LINE ID</th>
+      <th>電話番号</th>
+      <th>確定シフト</th>
+    </tr>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.name, user_path(user) %></td>
+        <td><%= user.email %></td>
+        <td>hoge0123</td>
+        <td>090-1234-5678</td>
+        <td>0日</td>
+      </tr>
+    <% end %>
+  </table>
+</div>

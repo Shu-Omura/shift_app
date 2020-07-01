@@ -1,8 +1,8 @@
+<%= render "shared/error_messages", resource: resource %>
 <div class="main-wrapper">
   <div class="col-md-4 col-md-offset-4 form-area">
     <h4><strong>パスワードをお忘れですか？</strong></h4>
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-      <%= render "users/shared/error_messages", resource: resource %>
 
       <div class="field form-group">
         <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class: "form-control" %>

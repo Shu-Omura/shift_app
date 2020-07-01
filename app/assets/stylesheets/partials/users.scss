@@ -53,3 +53,33 @@
     margin: 0;
   }
 }
+
+// users#index
+
+table {
+  margin-top: 30px;
+  border-radius: 6px;
+  caption {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  width: 100%;
+  background-color: white;
+  th{
+    padding : 20px 10px;
+    text-align: center;
+    font-size: 16px;
+    color: white;
+    background-color: rgb(61, 61, 61);
+  }
+  
+  td{
+    padding : 20px 10px;
+    text-align: center;
+  }
+}
+th,td{
+  border-top: solid 1px #aaaaaa;
+}
+

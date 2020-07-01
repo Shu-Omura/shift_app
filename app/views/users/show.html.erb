@@ -2,7 +2,7 @@
 <h2><%= @user.email %></h2>
 
 <h2>私のシフト</h2>
-<% @collected_user_shifts.each do |shift| %>
+<% @shifts.each do |shift| %>
   <%= link_to edit_collected_shift_path(shift) do %>
   <li>
     <%= shift.started_at %>
@@ -10,4 +10,5 @@
   </li>
   <% end %>
 <% end %>
-<%= link_to 'アカウント設定', edit_user_registration_path %>
+<%= link_to "アカウント設定", edit_user_registration_path %>
+<%= link_to "シフトを作成する", new_collected_shift_path %>

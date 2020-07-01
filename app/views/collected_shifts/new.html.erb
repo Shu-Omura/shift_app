@@ -1,11 +1,22 @@
-<h1>CollectedShifts#new</h1>
+<%= render "shared/error_messages", resource: @collected_shift %>
+<div class="main-wrapper">
+  <div class="col-md-4 col-md-offset-4 form-area">
+    <h4><strong>シフト新規作成</strong></h4>
+    <%= form_with(model: @collected_shift, local: true) do |f| %>
 
-<%= form_with(model: @collected_shift, local: true) do |f| %>
-  <%= f.label :started_at, class: 'form-group' %>
-  <%= f.datetime_select :started_at, class: 'form-control' %>
+      <div class="field form-group">
+        <%= f.label :started_at, class: "form-group" %>
+        <%= f.datetime_field :started_at, class: "form-control" %>
+      </div>
 
-  <%= f.label :finished_at, class: 'form-group' %>
-  <%= f.datetime_select :finished_at, class: 'form-control' %>
+      <div class="field form-group">
+        <%= f.label :finished_at, class: "form-group" %>
+        <%= f.datetime_field :finished_at, class: "form-control" %>
+      </div>
 
-  <%= f.submit '提出する', class: 'btn btn-default' %>
-<% end %>
+      <div class="actions">
+        <%= f.submit "提出", class: "form-control light" %>
+      </div>
+    <% end %>
+  </div>
+</div>

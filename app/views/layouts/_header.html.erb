@@ -13,13 +13,21 @@
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
             <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+              会社ID：<%= current_user.company_id %>
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'スタッフ一覧', users_path %></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
               <%= user_signed_in? ? current_user.name : 'ようこそゲストさん。' %>
             <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <% if user_signed_in? %>
-                <li><%= link_to 'スタッフ一覧', users_path %></li>
+          <% if user_signed_in? %>
                 <li><%= link_to 'マイページ', user_path(current_user) %></li>
                 <li><%= link_to 'アカウント設定', edit_user_registration_path %></li>
+                <li><%= link_to "シフトを作成する", new_collected_shift_path %></li>
                 <li class="divider"></li>
                 <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
               <% else %>

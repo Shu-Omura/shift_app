@@ -5,3 +5,7 @@ ja:
     attributes:
       user:
         name: 名前
+        company_id: 会社ID
+      collected_shift:
+          started_at: 出勤時刻
+          finished_at: 退勤時刻
