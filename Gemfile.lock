@@ -239,6 +239,8 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    simple_calendar (2.4.1)
+      rails (>= 3.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -298,6 +300,7 @@ DEPENDENCIES
   rspec-rails (~> 4.0, >= 4.0.1)
   rubocop-airbnb
   sass-rails (>= 6)
+  simple_calendar (~> 2.4, >= 2.4.1)
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)

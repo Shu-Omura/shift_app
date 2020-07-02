@@ -13,6 +13,7 @@ gem "devise-i18n-views", "~> 0.3.7"
 gem "bootstrap-sass", "~> 3.4", ">= 3.4.1"
 gem "jquery-rails", "~> 4.4"
 gem "rails-i18n", "~> 6.0"
+gem 'simple_calendar', '~> 2.4', '>= 2.4.1'
 # Use postgresql as the database for Active Record
 gem "pg", ">= 0.18", "< 2.0"
 # Use Puma as the app server
