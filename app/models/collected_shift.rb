@@ -3,6 +3,11 @@ class CollectedShift < ApplicationRecord
   validates_presence_of :started_at, :finished_at
   validate :validates_datetime
 
+  # simple_calendar用エイリアス
+  def start_time
+    started_at
+  end
+
   private
 
   def validates_datetime

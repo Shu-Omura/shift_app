@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @shifts = CollectedShift.where(user: current_user)
+    @collected_shifts = CollectedShift.where(user: current_user)
   end
 
   def index

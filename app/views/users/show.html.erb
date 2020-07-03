@@ -1,14 +1,22 @@
-<h1><%= @user.name %></h1>
-<h2><%= @user.email %></h2>
-
-<h2>私のシフト</h2>
-<% @shifts.each do |shift| %>
-  <%= link_to edit_collected_shift_path(shift) do %>
-  <li>
-    <%= shift.started_at %>
-    <%= shift.finished_at %>
-  </li>
-  <% end %>
-<% end %>
-<%= link_to "アカウント設定", edit_user_registration_path %>
-<%= link_to "シフトを作成する", new_collected_shift_path %>
+<div class="right-side-wrapper">
+  <div class="col-md-3 col-md-offset-1 links">
+    <p><%= link_to 'アカウント設定', edit_user_registration_path %></p>
+    <p><%= link_to '社員シフト一覧', collected_shifts_path %></p>
+    <%= link_to "シフトを作成する", new_collected_shift_path %>
+  </div>
+  <div class="col-md-6">
+    <h1>提出済みシフト</h1>
+    <%= month_calendar events: @collected_shifts do |date, shifts| %>
+      <%= date %>
+  
+      <% shifts.each do |shift| %>
+        <div>
+          <%= link_to edit_collected_shift_path(shift) do %>
+            <%= shift.started_at.strftime("%-H:%-M") %>〜
+            <%= shift.finished_at.strftime("%-H:%-M") %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

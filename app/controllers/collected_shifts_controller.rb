@@ -4,6 +4,7 @@ class CollectedShiftsController < ApplicationController
 
   def index
     @users = User.colleagues(current_user)
+    @collected_shifts = CollectedShift.where(user: @users)
   end
 
   def new
