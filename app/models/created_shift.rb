@@ -1,6 +1,6 @@
-class CollectedShift < ApplicationRecord
-  belongs_to :user
-  has_one :created_shift, autosave: true, dependent: :destroy
+class CreatedShift < ApplicationRecord
+  belongs_to :collected_shift, -> { where(is_determined: true) }, touch: true
+  delegate :user, to: :collected_shift
   validates_presence_of :started_at, :finished_at
   validate :validates_datetime
 
