@@ -5,7 +5,7 @@ FactoryBot.define do
     password              { "foobar" }
     password_confirmation { "foobar" }
     company_id { 1 }
-    confirmed_at          { Time.current }
+    confirmed_at { Time.current }
 
     factory :fixed_user do
       email { "fixed@user.com" }
