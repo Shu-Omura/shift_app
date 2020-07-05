@@ -3,10 +3,10 @@
   <%= date %>
   <% shifts.each do |shift| %>
     <div>
-      <%= link_to user_path(shift.user) do %>
+      <%= link_to created_shifts_path(collected_shift_id: shift.id), method: :post, data: { confirm: "確定しますか？" } do %>
         <%= shift.user.name %>: 
-        <%= shift.started_at.strftime("%-H:%-M") %>〜
-        <%= shift.finished_at.strftime("%-H:%-M") %>
+        <%= shift.started_at.strftime("%H:%M") %>〜
+        <%= shift.finished_at.strftime("%H:%M") %>
       <% end %>
     </div>
   <% end %>

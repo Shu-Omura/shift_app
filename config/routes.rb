@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   }
   resources :users, only: [:show, :index]
   resources :collected_shifts, except: [:show]
+  resources :created_shifts, only: [:index, :create, :destroy]
 end

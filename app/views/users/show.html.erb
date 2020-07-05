@@ -4,7 +4,7 @@
     <p><%= link_to '社員シフト一覧', collected_shifts_path %></p>
     <%= link_to "シフトを作成する", new_collected_shift_path %>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6 table-area">
     <h1>提出済みシフト</h1>
     <%= month_calendar events: @collected_shifts do |date, shifts| %>
       <%= date %>
@@ -12,8 +12,8 @@
       <% shifts.each do |shift| %>
         <div>
           <%= link_to edit_collected_shift_path(shift) do %>
-            <%= shift.started_at.strftime("%-H:%-M") %>〜
-            <%= shift.finished_at.strftime("%-H:%-M") %>
+            <%= shift.started_at.strftime("%H:%M") %>〜
+            <%= shift.finished_at.strftime("%H:%M") %>
           <% end %>
         </div>
       <% end %>

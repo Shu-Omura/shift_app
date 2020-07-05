@@ -11,7 +11,7 @@ end
   
 5.times do |i|
   User.create!(
-    name: "yamada#{i} taro",
+    name: "yamada#{i+5} taro",
     email: "example#{i+5}@gmail.com",
     password: "foobar",
     password_confirmation: "foobar",
