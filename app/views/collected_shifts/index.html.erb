@@ -1,27 +1,34 @@
-<h2>全社員シフト</h2>
-<%= month_calendar events: @collected_shifts do |date, shifts| %>
-  <%= date %>
-  <% shifts.each do |shift| %>
-    <div>
-      <%= link_to created_shifts_path(collected_shift_id: shift.id), method: :post, data: { confirm: "確定しますか？" } do %>
-        <%= shift.user.name %>: 
-        <%= shift.started_at.strftime("%H:%M") %>〜
-        <%= shift.finished_at.strftime("%H:%M") %>
+<div class="wrapper">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1 all-staffs-table">
+      <h2>全社員シフト</h2>
+      <%= month_calendar events: @collected_shifts do |date, shifts| %>
+        <%= date %>
+        <% shifts.each do |shift| %>
+          <%= link_to created_shifts_path(collected_shift_id: shift.id), method: :post, data: { confirm: "確定しますか？" } do %>
+          <%= shift.user.name %>: 
+          <%= shift.started_at.strftime("%H:%M") %>〜
+          <%= shift.finished_at.strftime("%H:%M") %>
+          <% end %>
+        <% end %>
       <% end %>
     </div>
-  <% end %>
-<% end %>
-
-<table>
-  <caption>スタッフ別</caption>
-  <tr>
-    <th>スタッフ名</th>
-    <th>出勤予定日数</th>
-  </tr>
-  <% @users.each do |user| %>
-    <tr>
-      <td><%= user.name %></td>
-      <td><%= user.collected_shifts.count %></td>
-    </tr>
-  <% end %>
-</table>
+  </div>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1 all-staffs-table lower-table">
+      <h2>スタッフ別</h2>
+      <table>
+        <tr>
+          <th>スタッフ名</th>
+          <th>出勤予定日数</th>
+        </tr>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.collected_shifts.count %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

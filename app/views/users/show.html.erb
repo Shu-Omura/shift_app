@@ -1,18 +1,38 @@
-<div class="right-side-wrapper">
-  <div class="col-md-3 col-md-offset-1 links">
+<%= render "shared/error_messages", resource: @collected_shift %>
+<div class="wrapper right-side-wrapper">
+  <div class="col-md-3 links">
+    <span class="gravatar"><%= gravatar_for @user %></span>
+    <h3><%= @user.name %></h3>
+    <p><strong>出勤予定回数：<%= @collected_shifts.count %>回</strong></p>
+    <p><strong>出勤実績：？回</strong></p>
     <p><%= link_to 'アカウント設定', edit_user_registration_path %></p>
     <p><%= link_to '社員シフト一覧', collected_shifts_path %></p>
-    <%= link_to "シフトを作成する", new_collected_shift_path %>
+    <h3><strong>シフト新規作成</strong></h3>
+    <%= form_with(model: @collected_shift, local: true) do |f| %>
+
+      <div class="field form-group">
+        <%= f.label :started_at, class: "form-group" %>
+        <%= f.datetime_field :started_at, class: "form-control" %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :finished_at, class: "form-group" %>
+        <%= f.datetime_field :finished_at, class: "form-control" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "提出", class: "form-control light" %>
+      </div>
+    <% end %>
   </div>
-  <div class="col-md-6 table-area">
-    <h1>提出済みシフト</h1>
+  <div class="col-md-7 col-md-offset-1 table-area">
+    <h2>提出済みシフト</h2>
     <%= month_calendar events: @collected_shifts do |date, shifts| %>
       <%= date %>
-  
       <% shifts.each do |shift| %>
         <div>
           <%= link_to edit_collected_shift_path(shift) do %>
-            <%= shift.started_at.strftime("%H:%M") %>〜
+            <%= shift.started_at.strftime("%H:%M") %> -
             <%= shift.finished_at.strftime("%H:%M") %>
           <% end %>
         </div>

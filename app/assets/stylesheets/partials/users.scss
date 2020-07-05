@@ -1,4 +1,17 @@
-// registrations, sessions, passwords
+@mixin title {
+  margin-bottom: 20px;
+  padding: 20px 10px;
+  border-bottom: 2px solid rgb(170, 170, 170);
+  font-weight: bold;
+}
+
+@mixin table-design {
+  background-color: white;
+  box-shadow: 5px 5px 25px gray;
+  border-radius: 5px;
+}
+
+// registrations#new, sessions#new, passwords#new
 .main-wrapper{
   img {
     margin-top: 160px;
@@ -8,9 +21,7 @@
   .form-area {
     margin-top: 80px;
     padding: 15px;
-    background-color: white;
-    border-radius: 6px;
-    box-shadow: 5px 5px 15px gray;
+    @include table-design;
   }
   .oauth-form {
     margin-top: 30px;
@@ -40,46 +51,41 @@
 .right-side-wrapper {
   text-align: left;
   .links {
-    margin-top: 120px;
+    margin-left: 30px;
+    padding: 15px;
     text-align: left;
+    border-left: 3px solid #4885ed;
+    .gravatar {
+      border-radius: 50%;
+      width: 40%;
+      height: 40%;
+    }
   }
-  h1 {
-    margin-bottom: 40px;
-    padding: 30px 0px;
+  h2 {
+    @include title;
+  }
+  h3 {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
     border-bottom: 2px solid rgb(170, 170, 170);
-    font-weight: bold;
   }
   h4 {
     margin: 0;
   }
+  .table-area {
+  @include table-design;
+  }
 }
 
-// users#index
+// users#index, collected_shifts#index, created_shifts#index
+.all-staffs-table {
+  @include table-design;
+  h2 {
+    @include title;
+    text-align: left;
+  }
+}
 
-table {
+.lower-table {
   margin-top: 30px;
-  border-radius: 6px;
-  caption {
-    text-align: center;
-    font-size: 30px;
-    font-weight: bold;
-  }
-  width: 100%;
-  background-color: white;
-  th{
-    padding : 20px 10px;
-    text-align: center;
-    font-size: 16px;
-    color: white;
-    background-color: rgb(61, 61, 61);
-  }
-  
-  td{
-    padding : 20px 10px;
-    text-align: center;
-  }
 }
-th,td{
-  border-top: solid 1px #aaaaaa;
-}
-

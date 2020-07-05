@@ -7,10 +7,6 @@ class CollectedShiftsController < ApplicationController
     @collected_shifts = CollectedShift.where(user: @users)
   end
 
-  def new
-    @collected_shift = current_user.collected_shifts.build
-  end
-
   def create
     @collected_shift = current_user.collected_shifts.build(shift_params)
     if @collected_shift.save

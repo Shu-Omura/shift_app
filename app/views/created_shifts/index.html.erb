@@ -1,13 +1,13 @@
-<h2>確定版</h2>
-<%= month_calendar events: @created_shifts do |date, shifts| %>
-  <%= date %>
-  <% shifts.each do |shift| %>
-    <div>
+<div class="wrapper col-md-10 col-md-offset-1 all-staffs-table">
+  <h2>確定版</h2>
+  <%= month_calendar events: @created_shifts do |date, shifts| %>
+    <%= date %>
+    <% shifts.each do |shift| %>
       <%= link_to created_shift_path(shift.id), method: :delete, data: { confirm: "未確定に変更してよろしいですか？" } do %>
         <%= shift.user.name %>: 
         <%= shift.started_at.strftime("%H:%M") %>〜
         <%= shift.finished_at.strftime("%H:%M") %>
       <% end %>
-    </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>
