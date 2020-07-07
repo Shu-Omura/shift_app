@@ -3,7 +3,7 @@
   <%= month_calendar events: @created_shifts do |date, shifts| %>
     <%= date %>
     <% shifts.each do |shift| %>
-      <%= link_to created_shift_path(shift.id), method: :delete, data: { confirm: "未確定に変更してよろしいですか？" } do %>
+      <%= link_to collected_shift_created_shift_path(shift.collected_shift, shift), method: :delete, data: { confirm: "未確定に変更してよろしいですか？" } do %>
         <%= shift.user.name %>: 
         <%= shift.started_at.strftime("%H:%M") %>〜
         <%= shift.finished_at.strftime("%H:%M") %>

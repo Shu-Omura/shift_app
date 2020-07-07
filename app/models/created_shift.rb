@@ -3,6 +3,7 @@ class CreatedShift < ApplicationRecord
   delegate :user, to: :collected_shift
   validates_presence_of :started_at, :finished_at
   validate :validates_datetime
+  scope :user_created_shifts, -> (user_ids) { joins(collected_shift: :user).where(users: { id: user_ids }) }
 
   # simple_calendar用エイリアス
   def start_time

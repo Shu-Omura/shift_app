@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable,
          :omniauthable, omniauth_providers: %i(facebook google_oauth2)
   has_many :collected_shifts, dependent: :destroy
-  has_many :determined_shifts, through: :collected_shifts, source: :created_shift
+  has_many :created_shifts, through: :collected_shifts
   validates_presence_of :name
   scope :colleagues, -> (user) { where(company_id: user.company_id) }
 

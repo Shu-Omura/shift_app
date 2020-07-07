@@ -1,8 +1,7 @@
 class CreatedShiftsController < ApplicationController
   def index
-    users = User.colleagues(current_user)
-    determined_shifts = CollectedShift.where(user: users).where(is_determined: true)
-    @created_shifts = CreatedShift.where(collected_shift: determined_shifts)
+    user_ids = User.select(:id).colleagues(current_user)
+    @created_shifts = CreatedShift.user_created_shifts(user_ids)
   end
 
   def create
