@@ -10,5 +10,9 @@ FactoryBot.define do
     factory :fixed_user do
       email { "fixed@user.com" }
     end
+
+    factory :admin_user do
+      admin { true }
+    end
   end
 end

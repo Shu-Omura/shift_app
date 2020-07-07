@@ -24,38 +24,13 @@ RSpec.describe "CollectedShifts", type: :request do
       end
 
       it "shows collected_shifts and users resources" do
-        expect(response.body).to include collected_shift.started_at.strftime("%-H:%-M")
+        expect(response.body).to include collected_shift.started_at.strftime("%H:%M")
         expect(response.body).to include user.name
       end
     end
 
     context "as a guest" do
       before { get collected_shifts_path }
-
-      it "returns http 302" do
-        expect(response).to have_http_status(302)
-      end
-
-      it "redirects to /sign_in" do
-        expect(response).to redirect_to new_user_session_path
-      end
-    end
-  end
-
-  describe "GET #new" do
-    context "as authenticated user" do
-      before do
-        sign_in user
-        get new_collected_shift_path
-      end
-
-      it "returns http 200" do
-        expect(response).to have_http_status(200)
-      end
-    end
-
-    context "as guest" do
-      before { get new_collected_shift_path }
 
       it "returns http 302" do
         expect(response).to have_http_status(302)
@@ -76,7 +51,7 @@ RSpec.describe "CollectedShifts", type: :request do
         expect(response).to have_http_status(302)
       end
 
-      it "redirects to /users" do
+      it "redirects to users#show" do
         post collected_shifts_path, params: { collected_shift: collected_shift_params }
         expect(response).to redirect_to user_path(user)
       end

@@ -13,7 +13,9 @@ class CollectedShiftsController < ApplicationController
       flash[:success] = "シフトを提出しました"
       redirect_to current_user
     else
-      render "new"
+      @user = current_user
+      @collected_shifts = CollectedShift.where(user: current_user)
+      render 'users/show'
     end
   end
 
