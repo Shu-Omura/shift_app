@@ -14,7 +14,9 @@
             <% if user_signed_in? %>
               <li><%= link_to 'スタッフ一覧', users_path, class: "stated" %></li>
               <li><%= link_to '社員シフト一覧', collected_shifts_path, class: "stated" %></li>
-              <li><%= link_to '確定シフト', created_shifts_path, class: "stated" %></li>
+              <% if current_user.admin? %>
+                <li><%= link_to '確定シフト', created_shifts_path, class: "stated" %></li>
+              <% end %>
               <li><%= link_to "会社ID：#{current_user.company_id}", '#', class: "stated" %></li>
             <% end %>
           <li class="dropdown">

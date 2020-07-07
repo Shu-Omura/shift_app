@@ -1,21 +1,34 @@
 <div class="wrapper col-md-10 col-md-offset-1 all-staffs-table">
   <h2>スタッフ一覧</h2>
-  <table>
-    <tr>
-      <th>スタッフ名</th>
-      <th>アドレス</th>
-      <th>LINE ID</th>
-      <th>電話番号</th>
-      <th>確定シフト</th>
-    </tr>
-    <% @users.each do |user| %>
+  <% if current_user.admin? %>
+    <table>
       <tr>
-        <td><%= link_to user.name, user_path(user) %></td>
-        <td><%= user.email %></td>
-        <td>hoge0123</td>
-        <td>090-1234-5678</td>
-        <td>0日</td>
+        <th>スタッフ名</th>
+        <th>アドレス</th>
+        <th>LINE ID</th>
+        <th>電話番号</th>
+        <th>確定シフト</th>
       </tr>
-    <% end %>
-  </table>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= link_to user.name, user_path(user) %></td>
+          <td><%= user.email %></td>
+          <td>hoge0123</td>
+          <td>090-1234-5678</td>
+          <td>0日</td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <div class="staff-lists">
+      <% @users.each do |user| %>
+        <li>
+          <%= link_to gravatar_for(user), user %>
+          <p>
+            <strong><%= user.name %></strong></br>
+          </p>
+        </li>
+      <% end %>
+    </div>
+  <% end %>
 </div>

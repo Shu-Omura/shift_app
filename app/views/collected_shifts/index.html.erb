@@ -5,11 +5,19 @@
       <%= month_calendar events: @collected_shifts do |date, shifts| %>
         <%= date %>
         <% shifts.each do |shift| %>
-          <%= link_to collected_shift_created_shifts_path(shift), method: :post, data: { confirm: "確定しますか？" } do %>
-          <%= shift.user.name %>: 
-          <%= shift.started_at.strftime("%H:%M") %>〜
-          <%= shift.finished_at.strftime("%H:%M") %>
+
+          <% links = capture do %>
+            <%= shift.user.name %>: 
+            <%= shift.started_at.strftime("%H:%M") %>〜
+            <%= shift.finished_at.strftime("%H:%M") %>
           <% end %>
+
+          <% if current_user.admin? %>
+            <%= link_to links, collected_shift_created_shifts_path(shift), method: :post, data: { confirm: "確定しますか？" } %>
+          <% else %>
+            <a><%= links %></a>
+          <% end %>
+
         <% end %>
       <% end %>
     </div>

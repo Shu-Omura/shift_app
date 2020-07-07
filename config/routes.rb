@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   }
   resources :users, only: [:show, :index]
   resources :collected_shifts, except: [:show, :new] do
-    resources :created_shifts, only: [:create, :destroy]
+    resources :created_shifts, only: [:create, :destroy], module: 'admin'
   end
-  resources :created_shifts, only: [:index]
+  resources :created_shifts, only: [:index], module: 'admin'
 end
