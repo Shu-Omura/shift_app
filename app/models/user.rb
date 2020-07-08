@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i(facebook google_oauth2)
   has_many :collected_shifts, dependent: :destroy
   has_many :created_shifts, through: :collected_shifts
+  has_many :attendances, dependent: :destroy
   validates_presence_of :name
   scope :colleagues, -> (user) { where(company_id: user.company_id) }
 
