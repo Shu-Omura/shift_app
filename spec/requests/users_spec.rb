@@ -78,7 +78,7 @@ RSpec.describe "Users", type: :request do
 
       it "redirects to /" do
         post user_registration_path, params: { user: user_params }
-        expect(response).to redirect_to root_url
+        expect(response).to redirect_to User.last
       end
 
       it "is saved in database" do
