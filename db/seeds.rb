@@ -5,8 +5,6 @@
     password: "foobar",
     password_confirmation: "foobar",
     company_id: 1,
-    confirmed_at: DateTime.new(2020, 01, 01, 12, 0)
-    )
 end
   
 5.times do |i|
@@ -16,8 +14,6 @@ end
     password: "foobar",
     password_confirmation: "foobar",
     company_id: 2,
-    confirmed_at: DateTime.new(2020, 01, 01, 12, 0)
-    )
 end
     
 3.times do |i|

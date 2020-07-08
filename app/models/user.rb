@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # , :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable,
+         :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i(facebook google_oauth2)
   has_many :collected_shifts, dependent: :destroy
   has_many :created_shifts, through: :collected_shifts
@@ -14,7 +14,6 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
       user.name = auth.info.name
-      user.skip_confirmation!
     end
   end
 end
