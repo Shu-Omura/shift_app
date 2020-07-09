@@ -1,5 +1,6 @@
 class Attendance < ApplicationRecord
   belongs_to :user
+  belongs_to :working_result
   validates_presence_of :started_at, :finished_at
   validate :validates_datetime
   default_scope -> { order(started_at: :desc) }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_09_135706) do
+ActiveRecord::Schema.define(version: 2020_07_09_162203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,9 @@ ActiveRecord::Schema.define(version: 2020_07_09_135706) do
     t.datetime "finished_at", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "working_result_id", null: false
     t.index ["user_id"], name: "index_attendances_on_user_id"
+    t.index ["working_result_id"], name: "index_attendances_on_working_result_id"
   end
 
   create_table "collected_shifts", force: :cascade do |t|
@@ -61,6 +63,18 @@ ActiveRecord::Schema.define(version: 2020_07_09_135706) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "working_results", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "term"
+    t.integer "total_time"
+    t.integer "total_wage"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_working_results_on_user_id"
+  end
+
   add_foreign_key "attendances", "users"
+  add_foreign_key "attendances", "working_results"
   add_foreign_key "collected_shifts", "users"
+  add_foreign_key "working_results", "users"
 end
