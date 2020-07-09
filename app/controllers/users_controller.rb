@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @collected_shift = current_user.collected_shifts.build
     @collected_shifts = CollectedShift.where(user: current_user)
+    @attendances = Attendance.where(user: current_user)
   end
 
   def index
@@ -16,6 +17,6 @@ class UsersController < ApplicationController
 
   def correct_user
     user = User.find(params[:id])
-    redirect_to users_path unless user == current_user
+    redirect_to users_path unless current_user.admin? || (user == current_user)
   end
 end

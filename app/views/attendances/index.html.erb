@@ -1,0 +1,23 @@
+<div class="wrapper">
+  <div class="col-md-10 col-md-offset-1 all-staffs-table">
+    <h2>勤怠実績</h2>
+    <table>
+      <tr>
+        <th>スタッフ名</th>
+        <th>勤務日数</th>
+        <th>勤務時間合計</th>
+        <th>給与合計</th>
+        <th>勤務実績詳細</th>
+      </tr>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.attendances.count %></td>
+          <td></td>
+          <td></td>
+          <td><%= link_to "実績詳細", user_path(user) %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

@@ -9,3 +9,9 @@ ja:
       collected_shift:
           started_at: 出勤時刻
           finished_at: 退勤時刻
+      created_shift:
+          started_at: 出勤時刻
+          finished_at: 退勤時刻
+      attendance:
+          started_at: 出勤時刻
+          finished_at: 退勤時刻

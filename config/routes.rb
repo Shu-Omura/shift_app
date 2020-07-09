@@ -12,4 +12,5 @@ Rails.application.routes.draw do
     resources :created_shifts, only: [:create, :destroy], module: 'admin'
   end
   resources :created_shifts, only: [:index], module: 'admin'
+  resources :attendances, except: [:show]
 end
