@@ -1,0 +1,23 @@
+<%= render "shared/error_messages", resource: @user %>
+<div class="wrapper right-side-wrapper">
+  <div class="col-md-6 col-md-offset-3">
+    <h2>ユーザー情報の更新：@<%= @user.name %></h2>
+    <%= form_with(model: [:admin, @user], local: true) do |f| %>
+
+      <div class="field form-group">
+        <%= f.label :admin, "ユーザー区分", class: "form-group" %>
+        <%= f.select :admin, {"管理者": true, "一般ユーザー": false}, class: "form-control" %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :base_salary, "基本給", class: "form-group" %>
+        <%= f.text_field :base_salary, class: "form-control" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "更新する", class: "form-control light" %>
+      </div>
+    <% end %>
+    <%= link_to "ユーザーを削除する", user_path(@user), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+  </div>
+</div>

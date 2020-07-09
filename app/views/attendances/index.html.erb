@@ -4,6 +4,7 @@
     <table>
       <tr>
         <th>スタッフ名</th>
+        <th>基本給</th>
         <th>勤務日数</th>
         <th>勤務時間合計</th>
         <th>給与合計</th>
@@ -12,6 +13,7 @@
       <% @users.each do |user| %>
         <tr>
           <td><%= user.name %></td>
+          <td><%= user.base_salary %> /h</td>
           <td><%= user.attendances.count %></td>
           <td></td>
           <td></td>

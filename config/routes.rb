@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks",
   }
   resources :users, only: [:show, :index]
+  namespace :admin do
+    resources :users, only: [:edit, :update]
+  end
   resources :collected_shifts, except: [:show, :new] do
     resources :created_shifts, only: [:create, :destroy], module: 'admin'
   end

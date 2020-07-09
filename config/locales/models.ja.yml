@@ -6,6 +6,7 @@ ja:
       user:
         name: 名前
         company_id: 会社ID
+        base_salary: 基本給
       collected_shift:
           started_at: 出勤時刻
           finished_at: 退勤時刻

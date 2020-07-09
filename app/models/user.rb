@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :created_shifts, through: :collected_shifts
   has_many :attendances, dependent: :destroy
   validates_presence_of :name
+  validate :min_wage
   scope :colleagues, -> (user) { where(company_id: user.company_id) }
 
   def self.from_omniauth(auth)
@@ -15,6 +16,14 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
       user.name = auth.info.name
+    end
+  end
+
+  private
+
+  def min_wage
+    if base_salary < 790
+      errors.add(:base_salary, "が低すぎます")
     end
   end
 end
