@@ -5,8 +5,8 @@
     <% shifts.each do |shift| %>
       <%= link_to collected_shift_created_shift_path(shift.collected_shift, shift), method: :delete, data: { confirm: "未確定に変更してよろしいですか？" } do %>
         <%= shift.user.name %>: 
-        <%= shift.started_at.strftime("%H:%M") %>〜
-        <%= shift.finished_at.strftime("%H:%M") %>
+        <%= l shift.started_at %> -
+        <%= l shift.finished_at %>
       <% end %>
     <% end %>
   <% end %>

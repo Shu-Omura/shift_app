@@ -1,0 +1,5 @@
+ja:
+  time:
+    formats:
+      default: "%H:%M"
+      full: "%m/%d %H:%M"

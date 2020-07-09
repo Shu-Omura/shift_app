@@ -1,22 +1,2 @@
 <%= render "shared/error_messages", resource: @attendance %>
-<div class="wrapper right-side-wrapper">
-  <div class="col-md-6 col-md-offset-3">
-    <h2>勤怠</h2>
-    <%= form_with(model: @attendance, local: true) do |f| %>
-
-      <div class="field form-group">
-        <%= f.label :started_at, class: "form-group" %>
-        <%= f.datetime_field :started_at, class: "form-control" %>
-      </div>
-
-      <div class="field form-group">
-        <%= f.label :finished_at, class: "form-group" %>
-        <%= f.datetime_field :finished_at, class: "form-control" %>
-      </div>
-
-      <div class="actions">
-        <%= f.submit "確定する", class: "form-control light" %>
-      </div>
-    <% end %>
-  </div>
-</div>
+<%= render "shared/form", resource: @attendance, title: "勤怠", btn: "確定する" %>

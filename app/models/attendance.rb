@@ -3,7 +3,6 @@ class Attendance < ApplicationRecord
   validates_presence_of :started_at, :finished_at
   validate :validates_datetime
   default_scope -> { order(started_at: :desc) }
-  scope :users_attendances, -> (user_ids) { joins(:user).where(users: { id: user_ids }) }
 
   private
 

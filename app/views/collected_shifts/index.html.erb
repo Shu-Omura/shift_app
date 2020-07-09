@@ -8,8 +8,8 @@
 
           <% links = capture do %>
             <%= shift.user.name %>: 
-            <%= shift.started_at.strftime("%H:%M") %>〜
-            <%= shift.finished_at.strftime("%H:%M") %>
+            <%= l shift.started_at %> -
+            <%= l shift.finished_at %>
           <% end %>
 
           <% if current_user.admin? %>

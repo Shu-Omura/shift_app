@@ -34,8 +34,8 @@
         <% shifts.each do |shift| %>
           <div>
             <%= link_to edit_collected_shift_path(shift) do %>
-              <%= shift.started_at.strftime("%H:%M") %> -
-              <%= shift.finished_at.strftime("%H:%M") %>
+              <%= l shift.started_at %> -
+              <%= l shift.finished_at %>
             <% end %>
           </div>
         <% end %>
@@ -53,8 +53,8 @@
         </tr>
         <% @attendances.each do |attendance| %>
           <tr>
-            <td><%= attendance.started_at.strftime("%m月%d日 %H:%M") %></td>
-            <td><%= attendance.finished_at.strftime("%m月%d日 %H:%M") %></td>
+            <td><%= l attendance.started_at, format: :full %></td>
+            <td><%= l attendance.finished_at, format: :full %></td>
             <td><%= link_to "編集する", edit_attendance_path(attendance) %></td>
           </tr>
         <% end %>
