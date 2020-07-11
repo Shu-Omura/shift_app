@@ -2,10 +2,6 @@ class AttendancesController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_user, only: [:index]
 
-  def index
-    @users = User.colleagues(current_user)
-  end
-
   def new
     @attendance = current_user.attendances.build
   end
@@ -38,6 +34,9 @@ class AttendancesController < ApplicationController
     Attendance.find(params[:id]).destroy
     flash[:success] = "勤怠を削除しました"
     redirect_to current_user
+  end
+
+  def search
   end
 
   private
