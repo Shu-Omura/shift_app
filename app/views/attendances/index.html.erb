@@ -14,9 +14,9 @@
         <tr>
           <td><%= user.name %></td>
           <td><%= user.base_salary %> /h</td>
-          <td><%= user.attendances.count %></td>
-          <td></td>
-          <td></td>
+          <td><%= user.attendances_in_this_month.count %></td>
+          <td><%= hours_and_mins(user.working_results_in_this_month&.total_time) %></td>
+          <td><%= currency(user.working_results_in_this_month&.total_wage) %></td>
           <td><%= link_to "実績詳細", user_path(user) %></td>
         </tr>
       <% end %>
