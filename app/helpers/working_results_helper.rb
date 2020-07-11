@@ -1,5 +1,4 @@
 module WorkingResultsHelper
-
   def hours_and_mins(second)
     return "-" if second.nil?
     hours = second.div(3600)

@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :created_shifts, through: :collected_shifts
   has_many :attendances, dependent: :destroy
   has_many :working_results, dependent: :destroy
-  
+
   validates_presence_of :name
   validate :min_wage
 
