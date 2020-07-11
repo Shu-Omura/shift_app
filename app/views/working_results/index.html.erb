@@ -1,6 +1,7 @@
 <div class="wrapper">
   <div class="col-md-10 col-md-offset-1 all-staffs-table">
     <h2>勤怠実績</h2>
+    <div><%= render "search" %></div>
     <table>
       <tr>
         <th>スタッフ名</th>
@@ -14,9 +15,9 @@
         <tr>
           <td><%= user.name %></td>
           <td><%= user.base_salary %> /h</td>
-          <td><%= user.attendances_in_this_month.count %></td>
-          <td><%= hours_and_mins(user.working_results_in_this_month&.total_time) %></td>
-          <td><%= currency(user.working_results_in_this_month&.total_wage) %></td>
+          <td><%= user.attendances_on_term(@term).count %></td>
+          <td><%= hours_and_mins(user.working_results_on_term(@term)&.total_time) %></td>
+          <td><%= currency(user.working_results_on_term(@term)&.total_wage) %></td>
           <td><%= link_to "実績詳細", user_path(user) %></td>
         </tr>
       <% end %>

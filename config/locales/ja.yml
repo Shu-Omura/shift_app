@@ -4,3 +4,4 @@ ja:
       default: "%H:%M"
       full: "%m/%d %H:%M"
       term: "%Y/%m"
+      jpy: "%Y年%m月"

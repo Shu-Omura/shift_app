@@ -1,0 +1,10 @@
+<div class="col-md-3 search">
+  <%= form_with(url: working_results_path, method: :get, local: true) do |f| %>
+    <div class="input-group">
+      <%= f.select :term, options_for_select(@all_terms), {include_blank: "年月を選択"}, {class: "form-control"} %>
+      <span class="input-group-btn">
+        <%= f.submit "検索", :name => nil, class: "btn light" %>  
+      </span>
+    </div>
+  <% end %>
+</div>

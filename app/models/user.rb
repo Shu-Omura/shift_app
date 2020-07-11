@@ -22,12 +22,12 @@ class User < ApplicationRecord
     end
   end
 
-  def attendances_in_this_month
-    Attendance.in_this_month.where(user: self)
+  def attendances_on_term(month)
+    Attendance.on_term(month).where(user: self)
   end
 
-  def working_results_in_this_month
-    WorkingResult.in_this_month.where(user: self).first
+  def working_results_on_term(month)
+    WorkingResult.on_term(month).where(user: self).first
   end
 
   private

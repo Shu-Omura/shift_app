@@ -2,7 +2,7 @@
   <div class="calendar-heading">
     <div class="head-title">
       <%= link_to t('simple_calendar.previous', default: '<'), calendar.url_for_previous_view %>
-      <span class="calendar-title"><%= start_date.strftime("%Y年%m月") %></span>
+      <span class="calendar-title"><%= l start_date, formats: :jpy %></span>
       <%= link_to t('simple_calendar.next', default: '>'), calendar.url_for_next_view %>
     </div>
   </div>
