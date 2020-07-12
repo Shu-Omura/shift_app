@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_09_162203) do
+ActiveRecord::Schema.define(version: 2020_07_12_133906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,15 @@ ActiveRecord::Schema.define(version: 2020_07_09_162203) do
     t.index ["user_id"], name: "index_collected_shifts_on_user_id"
   end
 
+  create_table "companies", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "address"
+    t.integer "tel"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "auth_token"
+  end
+
   create_table "created_shifts", force: :cascade do |t|
     t.datetime "started_at", null: false
     t.datetime "finished_at", null: false
@@ -56,9 +65,10 @@ ActiveRecord::Schema.define(version: 2020_07_09_162203) do
     t.string "name", null: false
     t.string "provider"
     t.string "uid"
-    t.integer "company_id", default: 0, null: false
     t.boolean "admin", default: false
     t.integer "base_salary", default: 1000
+    t.bigint "company_id"
+    t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -76,5 +86,6 @@ ActiveRecord::Schema.define(version: 2020_07_09_162203) do
   add_foreign_key "attendances", "users"
   add_foreign_key "attendances", "working_results"
   add_foreign_key "collected_shifts", "users"
+  add_foreign_key "users", "companies"
   add_foreign_key "working_results", "users"
 end
