@@ -61,6 +61,17 @@
       height: 40%;
     }
   }
+  .top-msg {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    &:hover {
+      text-decoration: none;
+      color: #3c763d;
+      background-color: #caebbd;
+    }
+
+  }
   h2 {
     @include title;
   }

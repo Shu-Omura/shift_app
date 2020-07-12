@@ -31,6 +31,16 @@ class User < ApplicationRecord
     WorkingResult.on_term(month).where(user: self).first
   end
 
+  def update_with_authentication(params)
+    company = Company.find_by(name: params[:company])
+    if company && company.auth_token == params[:company_auth_token]
+      current_user.update(company: company)
+    else
+      errors.add(:company, "情報が正しくありません")
+      false
+    end
+  end
+
   private
 
   def min_wage

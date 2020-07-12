@@ -11,7 +11,7 @@ class Attendance < ApplicationRecord
 
   scope :recent, -> { order(started_at: :desc) }
   scope :in_this_month, -> { where(started_at: Time.current.all_month) }
-  scope :on_term, -> (month) { where(started_at: Date.strptime(month, "%Y/%m").all_month) }
+  scope :on_term, -> (month) { where(started_at: Time.zone.strptime(month, "%Y/%m").all_month) }
 
   def working_hours
     finished_at - started_at
