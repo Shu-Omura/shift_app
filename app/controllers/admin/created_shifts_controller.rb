@@ -13,7 +13,7 @@ module Admin
       @created_shift = collected_shift.build_created_shift(started_at: collected_shift.started_at,
                                                            finished_at: collected_shift.finished_at)
       if @created_shift.save
-        flash[:success] = "シフトを確定させました"
+        flash[:success] = 'シフトを確定させました'
         redirect_to collected_shifts_path
       end
     end
@@ -22,7 +22,7 @@ module Admin
       created_shift = CreatedShift.find(params[:id])
       created_shift.destroy
       created_shift.collected_shift.update(is_determined: false)
-      flash[:success] = "シフトを未確定に変更しました"
+      flash[:success] = 'シフトを未確定に変更しました'
       redirect_to created_shifts_path
     end
   end

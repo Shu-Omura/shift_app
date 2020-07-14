@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :company do
     user { nil }
-    name { "MyString" }
+    name { 'MyString' }
   end
 end

@@ -36,7 +36,7 @@ class User < ApplicationRecord
     if company && company.auth_token == params[:company_auth_token]
       current_user.update(company: company)
     else
-      errors.add(:company, "情報が正しくありません")
+      errors.add(:company, '情報が正しくありません')
       false
     end
   end
@@ -45,7 +45,7 @@ class User < ApplicationRecord
 
   def min_wage
     if base_salary < 790
-      errors.add(:base_salary, "が低すぎます")
+      errors.add(:base_salary, 'が低すぎます')
     end
   end
 end

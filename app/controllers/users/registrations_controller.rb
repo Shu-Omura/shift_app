@@ -66,7 +66,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       resource.update_with_password(params)
     end
-  end 
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params

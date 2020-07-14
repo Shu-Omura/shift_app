@@ -11,7 +11,7 @@ class Attendance < ApplicationRecord
 
   scope :recent, -> { order(started_at: :desc) }
   scope :in_this_month, -> { where(started_at: Time.current.all_month) }
-  scope :on_term, -> (month) { where(started_at: Time.zone.strptime(month, "%Y/%m").all_month) }
+  scope :on_term, -> (month) { where(started_at: Time.zone.strptime(month, '%Y/%m').all_month) }
 
   def working_hours
     finished_at - started_at
@@ -21,14 +21,14 @@ class Attendance < ApplicationRecord
 
   def validates_datetime
     if started_at.nil? || started_at > Date.today
-      errors.add(:started_at, "は今日以前の日時を選択してください")
+      errors.add(:started_at, 'は今日以前の日時を選択してください')
     elsif finished_at.nil? || finished_at < started_at + 1.minutes
-      errors.add(:finished_at, "は出勤時刻より後の日時を選択してください")
+      errors.add(:finished_at, 'は出勤時刻より後の日時を選択してください')
     end
   end
 
   def set_working_result
-    term = started_at.strftime("%Y/%m")
+    term = started_at.strftime('%Y/%m')
     working_result = WorkingResult.find_by(term: term, user: user)
     if working_result
       self.working_result = working_result
@@ -38,7 +38,7 @@ class Attendance < ApplicationRecord
   end
 
   def set_attributes_to_working_result
-    term = started_at.strftime("%Y/%m")
+    term = started_at.strftime('%Y/%m')
     working_result = WorkingResult.find_by(term: term, user: user)
     if working_result
       sum = 0
