@@ -19,7 +19,7 @@
                 <li><%= link_to '勤務実績', working_results_path, class:"stated" %></li>
                 <li><%= link_to "会社：#{current_user.company.name}", company_path(current_user), class: "stated" %></li>
               <% else %>
-                <li><a class="stated">会社：<%= "#{current_user.company.name}" %></a></li>
+                <li><a class="stated">会社：<%= current_user.company&.name || "未登録" %></a></li>
               <% end %>
             <% end %>
           <li class="dropdown">

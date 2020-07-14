@@ -32,7 +32,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       set_flash_message_for_update(resource, prev_unconfirmed_email)
       bypass_sign_in resource, scope: resource_name if sign_in_after_change_password?
 
-      respond_with resource, location: after_update_path_for(resource)
+      redirect_to user_path(resource)
     else
       clean_up_passwords resource
       set_minimum_password_length
