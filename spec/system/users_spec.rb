@@ -87,7 +87,7 @@ RSpec.describe 'Users', type: :system do
 
       expect(page).to have_content 'アカウント情報を変更しました。'
       expect(current_path).to eq user_path(user)
-      expect(user.reload.valid_password?("newpass")).to eq true
+      expect(user.reload.valid_password?('newpass')).to be_truthy
     end
 
     it 'deletes my account', js: true do
