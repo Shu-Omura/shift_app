@@ -6,10 +6,6 @@ FactoryBot.define do
     password_confirmation { 'password' }
     company
 
-    factory :fixed_user do
-      email { 'fixed@user.com' }
-    end
-
     factory :admin_user do
       admin { true }
     end
