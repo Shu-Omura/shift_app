@@ -7,20 +7,16 @@
           <th>スタッフ名</th>
           <th>区分</th>
           <th>アドレス</th>
-          <th>LINE ID</th>
-          <th>電話番号</th>
           <th>基本給</th>
-          <th>確定シフト</th>
+          <th>今月の実績</th>
         </tr>
         <% @users.each do |user| %>
-          <tr>
-            <td><%= link_to user.name, user_path(user) %></td>
-            <td><%= link_to user.admin? ? "管理者" : "一般ユーザー", edit_admin_user_url(user) %></td>
+          <tr class="staff-profile">
+            <td><%= link_to user.name, user %></td>
+            <td><%= link_to user.admin? ? "管理者" : "一般ユーザー", edit_admin_user_path(user) %></td>
             <td><%= user.email %></td>
-            <td>hoge0123</td>
-            <td>090-1234-5678</td>
             <td><%= user.base_salary %> /h</td>
-            <td>0日</td>
+            <td><%= user.working_resutls_in_this_month %></td>
           </tr>
         <% end %>
       </table>
@@ -28,19 +24,19 @@
       <div class="staff-lists">
         <% @users.each do |user| %>
           <li>
-            <%= link_to gravatar_for(user), user %>
-            <p>
-              <strong><%= user.name %></strong></br>
-            </p>
+            <%= gravatar_for(user) %>
+            <p><strong><%= user.name %></strong></p>
           </li>
         <% end %>
       </div>
     <% end %>
   </div>
 </div>
-<div class="row">
-  <div class="col-md-offset-1 col-md-11 explanation">
-    <p><strong>ユーザー区分</strong>の更新および、<strong>基本給</strong>の更新は区分リンクから行ってください。</p>
-    <p>スタッフ名リンクより、スタッフページに移動できます。スタッフの<strong>シフト提出状況・勤怠詳細</strong>が確認できます。</p>
+<% if current_user.admin? %>
+  <div class="row">
+    <div class="col-md-offset-1 col-md-11 explanation">
+      <p><strong>ユーザー区分</strong>の更新および、<strong>基本給</strong>の更新は区分リンクから行ってください。</p>
+      <p>スタッフ名リンクより、スタッフページに移動できます。スタッフの<strong>シフト提出状況・勤怠詳細</strong>が確認できます。</p>
+    </div>
   </div>
-</div>
+<% end %>

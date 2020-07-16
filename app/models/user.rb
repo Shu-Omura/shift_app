@@ -31,6 +31,10 @@ class User < ApplicationRecord
     WorkingResult.on_term(month).where(user: self).first
   end
 
+  def working_resutls_in_this_month
+    WorkingResult.in_this_month.where(user: self).first
+  end
+
   def update_with_authentication(params)
     company = Company.find_by(name: params[:company])
     if company && company.auth_token == params[:company_auth_token]

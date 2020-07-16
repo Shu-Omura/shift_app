@@ -5,12 +5,12 @@
     <%= form_with(model: [:admin, @user], local: true) do |f| %>
 
       <div class="field form-group">
-        <%= f.label :admin, "ユーザー区分", class: "form-group" %>
-        <%= f.select :admin, {"管理者": true, "一般ユーザー": false}, class: "form-control" %>
+        <h4><%= f.label :admin, "ユーザー区分", class: "form-group" %></h4>
+        <%= f.select :admin, {"管理者": true, "一般ユーザー": false}, {}, class: "form-control" %>
       </div>
 
       <div class="field form-group">
-        <%= f.label :base_salary, "基本給", class: "form-group" %>
+        <h4><%= f.label :base_salary, "基本給", class: "form-group" %></h4>
         <%= f.text_field :base_salary, class: "form-control" %>
       </div>
 

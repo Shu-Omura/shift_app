@@ -1,113 +1,86 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :system do
-  let!(:user) { create(:user, email: 'test@test.com') }
+  let(:company) { create(:company) }
+  let(:user) { create(:user, company: company) }
+  let(:admin_user) { create(:admin_user, name: 'admin', company: company) }
 
-  describe 'registrations#' do
-    context 'user has not sign up yet' do
-      before { visit root_url }
+  describe '#index' do
+    before { create_list(:user, 5, company: company) }
 
-      it 'signs up' do
-        expect(page).to have_link '新規登録'
-        expect(page).to have_link 'ログイン'
+    context 'as non_admin' do
+      before do
+        sign_in user
+        visit users_path
+      end
 
-        find('.top-form').click_link '新規登録'
+      it 'shows all users with no links and no details' do
+        expect(page).to have_selector('.staff-lists > li', count: 6)
+        expect(page).not_to have_selector('.staff-lists > a')
+        expect(page).not_to have_selector('.explanation')
 
-        expect(current_path).to eq new_user_registration_path
-
-        expect do
-          fill_in 'ユーザー名', with: 'Sample User'
-          fill_in 'メールアドレス', with: 'sample@gmail.com'
-          fill_in 'パスワード', with: 'foobar'
-          fill_in 'パスワード再入力', with: 'foobar'
-          click_button 'サインアップ'
-      
-          expect(page).to have_css '.alert-info'
-          expect(page).to have_content 'アカウント登録が完了しました。'
-        end.to change(User, :count).by(1)
-
-        expect(current_path).to eq user_path(User.last)
-        expect(page).to have_content 'Sample User'
-        expect(page).to have_link 'アカウント設定'
-        expect(page).to have_link '社員シフト一覧'
-        expect(page).to have_link '勤怠を入力する'
-        expect(page).to have_button '提出'
+        expect(page).not_to have_content user.email
+        expect(page).not_to have_content '一般ユーザー'
+        expect(page).not_to have_content user.base_salary 
       end
     end
 
-    context 'user already has signed up' do
+    context "as admin" do
       before do
-        sign_in user
-        visit user_path(user)
-        find('.left-side-bar').click_link 'アカウント設定'
+        sign_in admin_user
+        visit users_path
       end
 
-      it 'updates name' do
-        expect(current_path).to eq edit_user_registration_path
-        expect(page).to have_field 'ユーザー名', with: user.name
-        expect(page).to have_field 'メールアドレス', with: user.email
-        
-        fill_in '現在のパスワードを確認', with: 'password'
-        fill_in 'ユーザー名', with: 'Updated Name'
-        click_button '変更を保存'
-        
-        expect(page).to have_content 'アカウント情報を変更しました。'
-        expect(current_path).to eq user_path(user)
-        expect(user.reload.name).to eq 'Updated Name'
-      end
+      it 'shows all users with links and details' do
+        expect(page).to have_selector('.staff-profile', count: 6)
+        expect(page).to have_link admin_user.name
+        expect(page).to have_selector('.explanation')
 
-      it 'updates password' do
-        expect(page).to have_link 'パスワードを変更する'
+        expect(page).to have_content admin_user.email
+        expect(page).to have_content '管理者'
+        expect(page).to have_content admin_user.base_salary
 
-        click_link 'パスワードを変更する'
-        fill_in '現在のパスワードを確認', with: 'password'
-        fill_in '新しいパスワード', with: 'newpass'
-        fill_in '新しいパスワード再確認', with: 'newpass'
-        click_button '変更を保存'
+        within 'table' do
+          click_link admin_user.name
+        end
 
-        expect(page).to have_content 'アカウント情報を変更しました。'
-        expect(current_path).to eq user_path(user)
-        expect(user.reload.valid_password?('newpass')).to be_truthy
-      end
-
-      it 'deletes my account', js: true do
-        expect do
-          expect(page).to have_link 'アカウントを削除する'
-    
-          click_link 'アカウントを削除する'
-          page.driver.browser.switch_to.alert.accept
-    
-          expect(page).to have_content 'アカウントを削除しました'
-          expect(current_path).to eq root_path
-        end.to change(User, :count).by(-1)
+        expect(current_path).to eq user_path(admin_user)
       end
     end
   end
 
-  describe 'sessions#' do
-    before { visit root_url }
+  describe 'admin#edit' do
+    context 'as admin' do
+      before do
+        sign_in admin_user
+        visit users_path
+        within 'table' do
+          click_link '管理者'
+        end
+      end
 
-    it 'logs in and logs out' do
-      find('.top-form').click_link 'ログイン'
+      it 'updates base_salary' do
+        expect(current_path).to eq edit_admin_user_path(admin_user)
+        expect(page).to have_select('ユーザー区分', selected: '管理者')  
+        expect(page).to have_field '基本給', with: 1000
 
-      expect(current_path).to eq new_user_session_path
+        fill_in '基本給', with: 1200
+        click_button '更新する'
 
-      fill_in 'メールアドレス', with: 'test@test.com'
-      fill_in 'パスワード', with: 'password'
-      click_button 'ログイン'
+        expect(current_path).to eq users_path
+        expect(page).to have_content 'ユーザー情報を更新しました'
+        expect(page).to have_selector('table'), text: 1200
+      end
 
-      expect(page).to have_content 'ログインしました。'
-      expect(current_path).to eq user_path(user)
-      expect(page).to have_content user.name
-      expect(page).to have_link 'アカウント設定'
-      expect(page).to have_link '社員シフト一覧'
-      expect(page).to have_link '勤怠を入力する'
-      expect(page).to have_button '提出'
+      it 'updates admin to general user' do
+        select '一般ユーザー', from: 'ユーザー区分'
+        click_button '更新する'
 
-      click_link 'ログアウト'
+        expect(current_path).to eq users_path
+        expect(page).to have_content 'ユーザー情報を更新しました'
 
-      expect(page).to have_content 'ログアウトしました。'
-      expect(current_path).to eq root_path
+        expect(admin_user.reload.admin).to be false
+      end
     end
   end
 end

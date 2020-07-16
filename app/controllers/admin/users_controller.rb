@@ -19,7 +19,7 @@ module Admin
     private
 
     def user_params
-      params.require(:user).permit(:master, :base_salary)
+      params.require(:user).permit(:admin, :base_salary)
     end
   end
 end
