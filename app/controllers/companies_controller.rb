@@ -5,8 +5,7 @@ class CompaniesController < ApplicationController
 
   def new
     if current_user.company
-      flash[:danger] = '既に会社情報は登録済みです'
-      redirect_to current_user
+      redirect_to current_user, flash: {danger: '既に会社情報は登録済みです'}
     else
       @company = current_user.build_company
     end
@@ -16,9 +15,8 @@ class CompaniesController < ApplicationController
     @company = current_user.build_company(company_params)
     if @company.save
       current_user.update(admin: true)
-      flash[:success] = '会社を新規登録しました。認証キーを従業員に配布してください。'
-      flash[:info] = "認証キーは `#{@company.auth_token}` です。会社情報より確認できます。"
-      redirect_to current_user
+      redirect_to current_user, flash: {success: '会社を新規登録しました。認証キーを従業員に配布してください。',
+                                           info: "認証キーは `#{@company.auth_token}` です。会社情報より確認できます。"}
     else
       render 'new'
     end

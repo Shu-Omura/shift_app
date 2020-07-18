@@ -15,8 +15,7 @@ class AttendancesController < ApplicationController
   def create
     @attendance = current_user.attendances.build(attendance_params)
     if @attendance.save
-      flash[:success] = '勤怠を確定しました'
-      redirect_to current_user
+      redirect_to current_user, flash: {success: '勤怠を確定しました'}
     else
       render 'new'
     end
@@ -29,8 +28,7 @@ class AttendancesController < ApplicationController
   def update
     @attendance = Attendance.find(params[:id])
     if @attendance.update(attendance_params)
-      flash[:success] = '勤怠を変更しました'
-      redirect_to current_user
+      redirect_to current_user, flash: {success: '勤怠を変更しました'}
     else
       render 'edit'
     end
@@ -38,8 +36,7 @@ class AttendancesController < ApplicationController
 
   def destroy
     Attendance.find(params[:id]).destroy
-    flash[:success] = '勤怠を削除しました'
-    redirect_to current_user
+    redirect_to current_user, flash: {success: '勤怠を削除しました'}
   end
 
   private

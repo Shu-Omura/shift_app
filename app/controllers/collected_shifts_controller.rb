@@ -10,8 +10,7 @@ class CollectedShiftsController < ApplicationController
   def create
     @collected_shift = current_user.collected_shifts.build(shift_params)
     if @collected_shift.save
-      flash[:success] = 'シフトを提出しました'
-      redirect_to current_user
+      redirect_to current_user, flash: {success: 'シフトを提出しました'}
     else
       @user = current_user
       @collected_shifts = CollectedShift.where(user: current_user)
@@ -26,8 +25,7 @@ class CollectedShiftsController < ApplicationController
   def update
     @collected_shift = CollectedShift.find(params[:id])
     if @collected_shift.update(shift_params)
-      flash[:success] = 'シフトを更新しました'
-      redirect_to current_user
+      redirect_to current_user, flash: {success: 'シフトを更新しました'}
     else
       render 'edit'
     end
@@ -35,8 +33,7 @@ class CollectedShiftsController < ApplicationController
 
   def destroy
     CollectedShift.find(params[:id]).destroy
-    flash[:success] = 'シフトを削除しました'
-    redirect_to current_user
+    redirect_to current_user, flash: {success: 'シフトを削除しました'}
   end
 
   private
