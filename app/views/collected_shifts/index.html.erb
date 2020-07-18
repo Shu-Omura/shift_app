@@ -17,7 +17,6 @@
           <% else %>
             <a><%= links %></a>
           <% end %>
-
         <% end %>
       <% end %>
     </div>
@@ -33,7 +32,7 @@
         <% @users.each do |user| %>
           <tr>
             <td><%= user.name %></td>
-            <td><%= user.collected_shifts.count %></td>
+            <td><%= user.collected_shifts.size %></td>
           </tr>
         <% end %>
       </table>

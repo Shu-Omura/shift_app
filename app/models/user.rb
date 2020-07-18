@@ -26,6 +26,10 @@ class User < ApplicationRecord
     Attendance.on_term(month).where(user: self)
   end
 
+  def attendances_in_this_month
+    Attendance.in_this_month.where(user: self)
+  end
+
   def calc_total_wage(term)
     total_hours = self.attendances_on_term(term).calc_total_hours
     # slice(0, 1) => 時間, slice(3, 4) => 分

@@ -16,7 +16,7 @@
             <td><%= link_to user.admin? ? "管理者" : "一般ユーザー", edit_admin_user_path(user) %></td>
             <td><%= user.email %></td>
             <td><%= user.base_salary %> /h</td>
-            <td><%= user.working_resutls_in_this_month %></td>
+            <td><%= user.attendances_in_this_month.size %></td>
           </tr>
         <% end %>
       </table>
