@@ -49,8 +49,4 @@ RSpec.describe 'Users', type: :request do
       end
     end
   end
-
-  describe 'DELETE #destroy' do
-
-  end
 end

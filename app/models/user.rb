@@ -7,11 +7,10 @@ class User < ApplicationRecord
   has_many :collected_shifts, dependent: :destroy
   has_many :created_shifts, through: :collected_shifts
   has_many :attendances, dependent: :destroy
-  has_many :working_results, dependent: :destroy
   belongs_to :company, optional: true
 
-  validates_presence_of :name
-  validate :min_wage
+  validates :name, presence: true
+  validate :min_base_salary
 
   scope :colleagues, -> (user) { where(company_id: user.company_id) }
 
@@ -27,12 +26,11 @@ class User < ApplicationRecord
     Attendance.on_term(month).where(user: self)
   end
 
-  def working_results_on_term(month)
-    WorkingResult.on_term(month).where(user: self).first
-  end
-
-  def working_resutls_in_this_month
-    WorkingResult.in_this_month.where(user: self).first
+  def calc_total_wage(term)
+    total_hours = self.attendances_on_term(term).calc_total_hours
+    # slice(0, 1) => 時間, slice(3, 4) => 分
+    total_wage = (total_hours.slice(0, 1).to_i + total_hours.slice(3, 4).to_f / 60) * self.base_salary
+    total_wage.floor
   end
 
   def update_with_authentication(params)
@@ -47,7 +45,7 @@ class User < ApplicationRecord
 
   private
 
-  def min_wage
+  def min_base_salary
     if base_salary < 790
       errors.add(:base_salary, 'が低すぎます')
     end
