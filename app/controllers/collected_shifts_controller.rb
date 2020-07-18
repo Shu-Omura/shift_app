@@ -1,6 +1,7 @@
 class CollectedShiftsController < ApplicationController
   before_action :authenticate_user!
   before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :check_is_determined, only:[:edit, :update]
 
   def index
     @users = User.colleagues(current_user)
@@ -14,6 +15,7 @@ class CollectedShiftsController < ApplicationController
     else
       @user = current_user
       @collected_shifts = CollectedShift.where(user: current_user)
+      @attendances = Attendance.where(user: current_user).recent
       render 'users/show'
     end
   end
@@ -43,7 +45,13 @@ class CollectedShiftsController < ApplicationController
   end
 
   def correct_user
-    shift = CollectedShift.find(params[:id])
-    redirect_to root_url unless current_user.collected_shifts.include?(shift)
+    user = CollectedShift.find(params[:id]).user
+    redirect_to unless user == current_user
+  end
+
+  def check_is_determined
+    if CollectedShift.find(params[:id]).is_determined
+      redirect_to current_user, flash: {danger: '確定済みのシフトの変更はできません'}
+    end
   end
 end

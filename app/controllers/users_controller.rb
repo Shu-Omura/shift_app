@@ -16,10 +16,8 @@ class UsersController < ApplicationController
   private
 
   def correct_user
-    user = User.find(params[:id])
-    if current_user.admin?
-      return true
-    elsif user != current_user
+    return true if current_user.admin?
+    unless User.find(params[:id]) == current_user
       redirect_to users_path
     end
   end

@@ -1,6 +1,6 @@
 class CollectedShift < ApplicationRecord
   belongs_to :user
-  has_one :created_shift, autosave: true, dependent: :destroy
+  has_one :created_shift, dependent: :destroy
 
   include DatetimeValidators
   validate :validates_after_today
