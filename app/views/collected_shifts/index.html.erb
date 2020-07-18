@@ -12,7 +12,7 @@
             <%= l shift.finished_at %>
           <% end %>
 
-          <% if current_user.admin? %>
+          <% if current_user.admin? && shift.is_determined == false %>
             <%= link_to links, collected_shift_created_shifts_path(shift), method: :post, data: { confirm: "確定しますか？" } %>
           <% else %>
             <a><%= links %></a>

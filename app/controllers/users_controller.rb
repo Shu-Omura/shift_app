@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :correct_user, only: [:show]
+  before_action :check_company, only: [:index]
 
   def show
     @user = User.find(params[:id])
@@ -20,5 +21,9 @@ class UsersController < ApplicationController
     unless User.find(params[:id]) == current_user
       redirect_to users_path
     end
+  end
+
+  def check_company
+    redirect_to root_url unless current_user.company
   end
 end

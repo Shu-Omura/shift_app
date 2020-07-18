@@ -1,5 +1,6 @@
 class CollectedShiftsController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_company, only: [:index]
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :check_is_determined, only:[:edit, :update]
 
@@ -53,5 +54,9 @@ class CollectedShiftsController < ApplicationController
     if CollectedShift.find(params[:id]).is_determined
       redirect_to current_user, flash: {danger: '確定済みのシフトの変更はできません'}
     end
+  end
+
+  def check_company
+    redirect_to root_url unless current_user.company
   end
 end

@@ -7,18 +7,26 @@
         <th>住所</th>
         <th>電話番号</th>
         <th>認証キー</th>
+        <th></th>
       </tr>
       <tr>
         <td><%= @company.name %></td>
         <td><%= @company.address %></td>
         <td><%= @company.tel %></td>
         <td><%= @company.auth_token %></td>
+        <td><%= button_to 'トークン再生性', regenerate_company_path(@company), data: { confirm: 'トークンを再生性してよろしいですか?' }, class: "btn btn-default" %></td>
       </tr>
     </table>
   </div>
 </div>
 <div class="row">
   <div class="col-md-offset-1 col-md-11 explanation">
+    <p><strong><%= link_to '会社情報を更新する', edit_company_path(@company) %></strong></p>
     <p><strong>認証キー</strong>を従業員に配布して、各従業員が会社登録を行ってください。</p>
+    <% if @company.updated_at < Time.current - 3.months %>
+      <span class="alert-danger expire">最後に認証キーを設定してから3ヶ月以上経過しています。再生性をお勧めします。</span>
+    <% else %>
+      <p>定期的に認証キーを再生性することをお勧めします。</p>
+    <% end %>
   </div>
 </div>

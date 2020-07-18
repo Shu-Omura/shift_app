@@ -52,12 +52,18 @@
           <th>退勤時刻</th>
           <th></th>
         </tr>
-        <% @attendances.each do |attendance| %>
-          <tr>
-            <td><%= l attendance.started_at, format: :full %></td>
-            <td><%= l attendance.finished_at, format: :full %></td>
-            <td><%= link_to "編集する", edit_attendance_path(attendance) %></td>
-          </tr>
+        <% if @attendances.present? %>
+          <% @attendances.each do |attendance| %>
+            <tr>
+              <td><%= l attendance.started_at, format: :full %></td>
+              <td><%= l attendance.finished_at, format: :full %></td>
+              <td><%= link_to "編集する", edit_attendance_path(attendance) %></td>
+            </tr>
+          <% end %>
+        <% else %>
+            <tr>
+              <td colspan="3">登録済みのデータはありません</td>
+            </tr>
         <% end %>
       </table>
     </div>

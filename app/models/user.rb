@@ -32,15 +32,15 @@ class User < ApplicationRecord
 
   def calc_total_wage(term)
     total_hours = self.attendances_on_term(term).calc_total_hours
-    # slice(0, 1) => 時間, slice(3, 4) => 分
-    total_wage = (total_hours.slice(0, 1).to_i + total_hours.slice(3, 4).to_f / 60) * self.base_salary
+    str = total_hours.match(/(.*):(.*)/)
+    total_wage = (str[1].to_i + str[2].to_f / 60) * self.base_salary
     total_wage.floor
   end
 
-  def update_with_authentication(params)
+  def update_with_authentication(resource, params)
     company = Company.find_by(name: params[:company])
     if company && company.auth_token == params[:company_auth_token]
-      current_user.update(company: company)
+      resource.update(company: company)
     else
       errors.add(:company, '情報が正しくありません')
       false

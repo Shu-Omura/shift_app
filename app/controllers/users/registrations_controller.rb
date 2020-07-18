@@ -62,7 +62,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def update_resource(resource, params)
     if params[:company].present? || params[:company_auth_token].present?
-      resource.update_with_authentication(params)
+      resource.update_with_authentication(resource, params)
     else
       resource.update_with_password(params)
     end
