@@ -14,6 +14,7 @@ ja:
       created_shift:
           started_at: 出勤時刻
           finished_at: 退勤時刻
+          collected_shift: 提出済みシフト
       attendance:
           started_at: 出勤時刻
           finished_at: 退勤時刻

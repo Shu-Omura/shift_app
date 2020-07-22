@@ -2,18 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'CollectedShifts', type: :request do
   let(:user) { create(:user) }
-  let(:collected_shift_params) do
-    attributes_for(:collected_shift,
-                   started_at: Time.current + 2.days,
-                   finished_at: Time.current + 2.days + 1.hour,
-                   user: user)
-  end
-  let(:invalid_collected_shift_params) do
-    attributes_for(:collected_shift,
-                   started_at: Time.current + 2.days,
-                   finished_at: nil,
-                   user: user)
-  end
+  let(:collected_shift_params) { attributes_for(:collected_shift_2, user: user) }
+  let(:invalid_collected_shift_params) { attributes_for(:collected_shift_2, finished_at: nil, user: user) }
 
   describe 'GET #index' do
     let!(:collected_shift) { create(:collected_shift, user: user) }
@@ -49,41 +39,25 @@ RSpec.describe 'CollectedShifts', type: :request do
 
   describe 'POST #create' do
     let!(:collected_shift) { create(:collected_shift, user: user) }
+    subject { post collected_shifts_path, params: { collected_shift: params } }
 
     before { sign_in user }
 
     context 'as valid params' do
-      it 'returns http 302' do
-        post collected_shifts_path, params: { collected_shift: collected_shift_params }
-        expect(response).to have_http_status(302)
-      end
+      let(:params) { collected_shift_params }
 
-      it 'redirects to users#show' do
-        post collected_shifts_path, params: { collected_shift: collected_shift_params }
-        expect(response).to redirect_to user
-      end
-
-      it 'saved in database' do
-        expect do
-          post collected_shifts_path, params: { collected_shift: collected_shift_params }
-        end.to change(CollectedShift, :count).by(1)
-      end
+      it { is_expected.to eq 302 }
+      it { is_expected.to redirect_to user }
+      it { expect { subject }.to change(CollectedShift, :count).by(1) }
     end
 
     context 'as invalid params' do
-      it 'returns http 200' do
-        post collected_shifts_path, params: { collected_shift: invalid_collected_shift_params }
-        expect(response).to have_http_status(200)
-      end
+      let(:params) { invalid_collected_shift_params }
 
-      it "isn't saved in database" do
-        expect do
-          post collected_shifts_path, params: { collected_shift: invalid_collected_shift_params }
-        end.not_to change(CollectedShift, :count)
-      end
-
+      it { is_expected.to eq 200 }
+      it { expect { subject }.not_to change(CollectedShift, :count) }
       it 'shows error messages' do
-        post collected_shifts_path, params: { collected_shift: invalid_collected_shift_params }
+        subject
         expect(response.body).to include '退勤時刻を入力してください'
       end
     end
@@ -130,41 +104,30 @@ RSpec.describe 'CollectedShifts', type: :request do
 
     context 'with not determined collected_shift' do
       let(:status) { false }
+      subject { put collected_shift_path(collected_shift), params: { collected_shift: params } }
 
       context 'as valid params' do
-        before do
-          put collected_shift_path(collected_shift),
-                params: { collected_shift: collected_shift_params }
-        end
+        let(:params) { collected_shift_params }
 
-        it 'returns http 302' do
-          expect(response).to have_http_status(302)
-        end
-
-        it 'redirects to users#show' do
-          expect(response).to redirect_to user
-        end
-
-        it 'updates database' do
-          expect(collected_shift.reload.started_at.day).to eq Time.current.next_day(2).day
+        it { is_expected.to eq 302 }
+        it { is_expected.to redirect_to user }
+        it 'updates database' do      
+          subject
+          expect(collected_shift.reload.started_at.day).to eq params[:started_at].day
         end
       end
 
       context 'as invalid params' do
-        before do
-          put collected_shift_path(collected_shift),
-                params: { collected_shift: invalid_collected_shift_params }
-        end
+        let(:params) { invalid_collected_shift_params }
 
-        it 'returns http 200' do
-          expect(response).to have_http_status(200)
-        end
-
+        it { is_expected.to eq 200 }
         it 'is not updated database' do
-          expect(collected_shift.reload.started_at.day).not_to eq Time.current.next_day(2).day
+          subject
+          expect(collected_shift.reload.started_at.day).not_to eq params[:started_at].day
         end
 
         it 'shows error messages' do
+          subject
           expect(response.body).to include '退勤時刻を入力してください'
         end
       end
@@ -194,6 +157,7 @@ RSpec.describe 'CollectedShifts', type: :request do
 
   describe 'DELETE #destroy' do
     let!(:collected_shift) { create(:collected_shift, is_determined: status, user: user) }
+    subject { delete collected_shift_path(collected_shift) }
     
     context 'with not determined collected_shift' do
       let(:status) { false }
@@ -201,55 +165,23 @@ RSpec.describe 'CollectedShifts', type: :request do
       context 'as authenticated user' do
         before { sign_in user }
 
-        it 'returns http 302' do
-          delete collected_shift_path(collected_shift)
-          expect(response).to have_http_status(302)
-        end
-
-        it 'redirects to users#show' do
-          delete collected_shift_path(collected_shift)
-          expect(response).to redirect_to user_path(user)
-        end
-
-        it 'deletes in database' do
-          expect do
-            delete collected_shift_path(collected_shift)
-          end.to change(CollectedShift, :count).by(-1)
-        end
+        it { is_expected.to eq 302 }
+        it { is_expected.to redirect_to user }
+        it { expect{ subject }.to change(CollectedShift, :count).by(-1) }
       end
 
       context 'as guest' do
-        it 'returns http 200' do
-          delete collected_shift_path(collected_shift)
-          expect(response).to have_http_status(302)
-        end
-
-        it 'redirects to registration#new' do
-          delete collected_shift_path(collected_shift)
-          expect(response).to redirect_to new_user_session_path
-        end
-
-        it 'is not deleted in database' do
-          expect do
-            delete collected_shift_path(collected_shift)
-          end.not_to change(CollectedShift, :count)
-        end
+        it { is_expected.to eq 302 }
+        it { is_expected.to redirect_to new_user_session_path }
+        it { expect{ subject }.not_to change(CollectedShift, :count) }
       end
     end
 
     context 'with determined collected_shift' do
       let(:status) { true }
 
-      it 'returns http 302' do
-        delete collected_shift_path(collected_shift)
-        expect(response).to have_http_status(302)
-      end
-
-      it 'is not changed in database' do
-        expect do
-          delete collected_shift_path(collected_shift)
-        end.not_to change(CollectedShift, :count)
-      end
+      it { is_expected.to eq 302 }
+      it { expect{ subject }.not_to change(CollectedShift, :count) }
     end
   end
 end

@@ -4,6 +4,7 @@ class CreatedShift < ApplicationRecord
 
   include DatetimeValidators
   validate :validates_after_today
+  validate :validates_is_determined
 
   scope :user_created_shifts, -> (user_ids) { joins(collected_shift: :user).where(users: { id: user_ids }) }
 
@@ -20,7 +21,13 @@ class CreatedShift < ApplicationRecord
   def validates_after_today
     return false if started_at.nil? || finished_at.nil?
     if started_at < Date.today
-      errors.add(:started_at, 'は今日以降の日時を選択してください')
+      errors.add(:collected_shift, '：過去のシフトを選択することはできません')
+    end
+  end
+
+  def validates_is_determined
+    if collected_shift.is_determined == true
+      errors.add(:collected_shift, '：すでに確定済みのシフトを選択することはできません')
     end
   end
 

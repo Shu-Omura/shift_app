@@ -9,10 +9,14 @@ module Admin
 
     def create
       collected_shift = CollectedShift.find(params[:collected_shift_id])
-      created_shift = collected_shift.build_created_shift(started_at: collected_shift.started_at,
+      @created_shift = collected_shift.build_created_shift(started_at: collected_shift.started_at,
                                                           finished_at: collected_shift.finished_at)
-      if created_shift.save
+      if @created_shift.save
         redirect_to collected_shifts_path, flash: {success: 'シフトを確定させました'}
+      else
+        @users = User.colleagues(current_user)
+        @collected_shifts = CollectedShift.where(user: @users)
+        render 'collected_shifts/index'
       end
     end
 
