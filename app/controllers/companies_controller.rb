@@ -1,7 +1,7 @@
 class CompaniesController < ApplicationController
-  before_action :admin_user, only: [:show, :edit, :update]
+  before_action :admin_user, only: [:show, :edit, :update, :regenerate]
   before_action :correct_user, only: [:show, :edit, :update]
-  before_action :check_company, only: [:new]
+  before_action :check_company, only: [:new, :create]
 
   def show
     @company = Company.find(params[:id])
