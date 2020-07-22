@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @collected_shift = current_user.collected_shifts.build
     @collected_shifts = CollectedShift.where(user: current_user)
-    @attendances = Attendance.where(user: current_user).recent
+    @attendances = Attendance.where(user: current_user).recent.page(params[:page]).per(PER)
   end
 
   def index
