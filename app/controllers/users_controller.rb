@@ -22,8 +22,4 @@ class UsersController < ApplicationController
       redirect_to users_path
     end
   end
-
-  def check_company
-    redirect_to root_url unless current_user.company
-  end
 end

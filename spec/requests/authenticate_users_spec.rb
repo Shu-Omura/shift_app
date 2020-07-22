@@ -328,8 +328,4 @@ RSpec.describe 'AuthenticateUsers', type: :request do
       end
     end
   end
-
-  describe 'passwords' do
-    pending
-  end
 end

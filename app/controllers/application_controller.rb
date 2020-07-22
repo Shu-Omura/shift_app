@@ -17,4 +17,8 @@ class ApplicationController < ActionController::Base
   def admin_user
     redirect_back(fallback_location: root_url) unless current_user.admin?
   end
+
+  def check_company
+    redirect_to root_url unless current_user.company
+  end
 end

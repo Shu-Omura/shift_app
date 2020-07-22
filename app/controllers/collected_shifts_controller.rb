@@ -56,8 +56,4 @@ class CollectedShiftsController < ApplicationController
       redirect_to current_user, flash: {danger: '確定済みのシフトの変更はできません'}
     end
   end
-
-  def check_company
-    redirect_to root_url unless current_user.company
-  end
 end

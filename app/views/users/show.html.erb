@@ -5,7 +5,7 @@
       <span class="gravatar"><%= gravatar_for @user %></span>
       <h3><%= @user.name %></h3>
       <p><strong>出勤予定回数：<%= @collected_shifts.size %>回</strong></p>
-      <p><strong>出勤実績：<%= @attendances.size %>回</strong></p>
+      <p><strong>今月の出勤実績：<%= @attendances.in_this_month.size %>回</strong></p>
       <p><%= link_to 'アカウント設定', edit_user_registration_path %></p>
       <p><%= link_to '社員シフト一覧', collected_shifts_path %></p>
       <p><%= link_to '勤怠を入力する', new_attendance_path %></p>

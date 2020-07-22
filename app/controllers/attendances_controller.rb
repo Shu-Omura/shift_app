@@ -1,6 +1,7 @@
 class AttendancesController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_user, only: [:index]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
     @users = User.colleagues(current_user)
@@ -43,5 +44,12 @@ class AttendancesController < ApplicationController
 
   def attendance_params
     params.require(:attendance).permit(:started_at, :finished_at)
+  end
+
+  def correct_user
+    return true if current_user.admin?
+    unless Attendance.find(params[:id]).user == current_user
+      redirect_to current_user
+    end
   end
 end
