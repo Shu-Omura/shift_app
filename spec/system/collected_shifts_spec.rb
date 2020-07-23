@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'CollectedShifts', type: :system do
   let(:user) { create(:user) }
-  let!(:collected_shift) { create(:collected_shift, user: user) }
+  let!(:collected_shift) { create(:non_determined, user: user) }
 
   before do
     sign_in user
@@ -36,12 +36,12 @@ RSpec.describe 'CollectedShifts', type: :system do
 
     fill_in 'collected_shift_started_at', with: Time.current + 1.hour
 
-    click_button '変更を保存する'
+    click_button '変更する'
 
     expect(current_path).to eq user_path(user)
     expect(page).to have_content 'シフトを更新しました'
     # テスト中での時間差が影響しないよう分単位で比較
-    expect(collected_shift.started_at.strftime('%H:%M')).to eq Time.current.strftime('%H:%M')
+    expect(collected_shift.reload.started_at.strftime('%H:%M')).to eq Time.current.since(1.hour).strftime('%H:%M')
   end
 
   it 'deletes collected_shifts', js: true do
@@ -51,8 +51,8 @@ RSpec.describe 'CollectedShifts', type: :system do
       click_link '削除する'
       page.driver.browser.switch_to.alert.accept
 
-      expect(current_path).to eq user_path(user)
       expect(page).to have_content 'シフトを削除しました'
+      expect(current_path).to eq user_path(user)
     end.to change(CollectedShift, :count).by(-1)
   end
 end
