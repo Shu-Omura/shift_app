@@ -1,6 +1,5 @@
 inherit_from:
   - .rubocop_airbnb.yml
-  - .rubocop_todo.yml
 
 AllCops:
   TargetRubyVersion: 2.7
@@ -16,3 +15,13 @@ Metrics/LineLength:
 Lint/UselessAssignment:
   Exclude:
     - 'spec/models/user_spec.rb'
+
+RSpec/EmptyExampleGroup:
+  Enabled: false
+
+Airbnb/SimpleModifierConditional:
+  Exclude:
+    - 'app/models/attendance.rb'
+    - 'app/models/collected_shift.rb'
+    - 'app/models/concerns/datetime_validators.rb'
+    - 'app/models/created_shift.rb'

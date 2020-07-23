@@ -1,0 +1,33 @@
+<div class="wrapper">
+  <div class="col-md-10 col-md-offset-1 all-staffs-table">
+    <h2>勤怠実績</h2>
+    <div><%= render 'search', all_terms: @all_terms %></div>
+    <table>
+      <tr>
+        <th>スタッフ名</th>
+        <th>基本給</th>
+        <th>勤務日数</th>
+        <th>勤務時間合計</th>
+        <th>給与合計</th>
+        <th>勤務実績詳細</th>
+      </tr>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.base_salary %> /h</td>
+          <td><%= user.attendances_on_term(@term).size %></td>
+          <% if user.attendances_on_term(@term).present? %>
+            <!-- @termにおける総勤務時間 -->
+            <td><%= user.attendances_on_term(@term).calc_total_hours %></td>
+            <!-- @termにおける総賃金 -->
+            <td><%= user.calc_total_wage(@term) %> 円</td>
+          <% else %>
+            <td></td>
+            <td></td>
+          <% end %>
+          <td><%= link_to "実績詳細", user_path(user) %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

@@ -1,5 +1,42 @@
-<h1>ユーザー一覧</h1>
-<% @users.each do |user| %>
-  <%= user.name %>
-  <%= user.email %>
+<div class="row">
+  <div class="wrapper col-md-10 col-md-offset-1 all-staffs-table">
+    <h2>スタッフ一覧</h2>
+    <% if current_user.admin? %>
+      <table>
+        <tr>
+          <th>スタッフ名</th>
+          <th>区分</th>
+          <th>アドレス</th>
+          <th>基本給</th>
+          <th>今月の実績</th>
+        </tr>
+        <% @users.each do |user| %>
+          <tr class="staff-profile">
+            <td><%= link_to user.name, user %></td>
+            <td><%= link_to user.admin? ? "管理者" : "一般ユーザー", edit_admin_user_path(user) %></td>
+            <td><%= user.email %></td>
+            <td><%= user.base_salary %> /h</td>
+            <td><%= user.attendances_in_this_month.size %> 日</td>
+          </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <div class="staff-lists">
+        <% @users.each do |user| %>
+          <li>
+            <%= gravatar_for(user) %>
+            <p><strong><%= user.name %></strong></p>
+          </li>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<% if current_user.admin? %>
+  <div class="row">
+    <div class="col-md-offset-1 col-md-11 explanation">
+      <p><strong>ユーザー区分</strong>の更新および、<strong>基本給</strong>の更新は区分リンクから行ってください。</p>
+      <p>スタッフ名リンクより、スタッフページに移動できます。スタッフの<strong>シフト提出状況・勤怠詳細</strong>が確認できます。</p>
+    </div>
+  </div>
 <% end %>

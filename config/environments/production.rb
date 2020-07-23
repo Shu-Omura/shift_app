@@ -66,14 +66,12 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: host }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  # Sendgrid for heroku
   config.action_mailer.smtp_settings = {
-    :address => 'smtp.sendgrid.net',
-    :domain => 'heroku.com',
+    :address => 'smtp.gmail.com',
+    :domain => 'gmail.com',
     :port => 587,
-    :user_name => Rails.application.credentials.sendgrid_username,
-    :password => Rails.application.credentials.sendgrid_password,
-    :authentication => :plain,
+    :user_name => 'ohs.potepote.camp@gmail.com',
+    :password => Rails.application.credentials.gmail[:app_password],
     :enable_starttls_auto => true,
   }
 
@@ -91,7 +89,7 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
+  if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)

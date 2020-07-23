@@ -1,3 +1,74 @@
-<%= render 'shared/flash' %>
-<h1><%= @user.name %></h1>
-<h2><%= @user.email %></h2>
+<%= render "shared/error_messages", resource: @collected_shift %>
+<div class="wrapper right-side-wrapper">
+  <div class="row">
+    <div class="col-md-3 links left-side-bar">
+      <span class="gravatar"><%= gravatar_for @user %></span>
+      <h3><%= @user.name %></h3>
+      <p><strong>出勤予定回数：<%= @collected_shifts.size %>回</strong></p>
+      <p><strong>今月の出勤実績：<%= @attendances.in_this_month.size %>回</strong></p>
+      <p><%= link_to 'アカウント設定', edit_user_registration_path %></p>
+      <p><%= link_to '社員シフト一覧', collected_shifts_path %></p>
+      <p><%= link_to '勤怠を入力する', new_attendance_path %></p>
+      <h3><strong>シフト新規作成</strong></h3>
+      <%= form_with(model: @collected_shift, local: true) do |f| %>
+
+        <div class="field form-group">
+          <%= f.label :started_at, class: "form-group" %>
+          <%= f.datetime_field :started_at, class: "form-control" %>
+        </div>
+
+        <div class="field form-group">
+          <%= f.label :finished_at, class: "form-group" %>
+          <%= f.datetime_field :finished_at, class: "form-control" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "提出", class: "form-control light" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-7 col-md-offset-1 table-area">
+      <h2>提出済みシフト</h2>
+      <%= month_calendar events: @collected_shifts do |date, shifts| %>
+        <%= date %>
+        <% shifts.each do |shift| %>
+          <div>
+            <%= link_to edit_collected_shift_path(shift) do %>
+              <%= l shift.started_at %> -
+              <%= l shift.finished_at %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 links"></div>
+    <div class="col-md-7 col-md-offset-1 table-area">
+      <h2>今月の勤怠</h2>
+      <table>
+        <tr>
+          <th>出勤時刻</th>
+          <th>退勤時刻</th>
+          <th></th>
+        </tr>
+        <% if @attendances.present? %>
+          <% @attendances.each do |attendance| %>
+            <tr>
+              <td><%= l attendance.started_at, format: :full %></td>
+              <td><%= l attendance.finished_at, format: :full %></td>
+              <td><%= link_to "編集する", edit_attendance_path(attendance) %></td>
+            </tr>
+          <% end %>
+        <% else %>
+            <tr>
+              <td colspan="3">登録済みのデータはありません</td>
+            </tr>
+        <% end %>
+      </table>
+      <div class="col-md-offset-3">
+        <%= paginate @attendances if @attendances %>
+      </div>
+    </div>
+  </div>
+</div>

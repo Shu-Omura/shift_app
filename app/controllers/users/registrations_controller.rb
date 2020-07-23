@@ -16,10 +16,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
   def edit
-    if params[:path].present?
-      return render "users/registrations/#{params[:path]}"
+    if params[:path]
+      render "users/registrations/#{params[:path]}"
     end
-    super
   end
 
   # PUT /resource
@@ -33,11 +32,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
       set_flash_message_for_update(resource, prev_unconfirmed_email)
       bypass_sign_in resource, scope: resource_name if sign_in_after_change_password?
 
-      respond_with resource, location: after_update_path_for(resource)
+      redirect_to user_path(resource)
     else
       clean_up_passwords resource
       set_minimum_password_length
-      if params[:path].present?
+      if params[:path]
         render "users/registrations/#{params[:path]}"
       else
         respond_with resource
@@ -59,7 +58,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
+
+  def update_resource(resource, params)
+    if params[:company].present? || params[:company_auth_token].present?
+      resource.update_with_authentication(resource, params)
+    else
+      resource.update_with_password(params)
+    end
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
