@@ -105,6 +105,8 @@ GEM
     factory_bot_rails (6.0.0)
       factory_bot (~> 6.0.0)
       railties (>= 5.0.0)
+    faker (2.13.0)
+      i18n (>= 1.6, < 2)
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.13.1)
@@ -343,6 +345,7 @@ DEPENDENCIES
   devise-i18n (~> 1.9, >= 1.9.1)
   devise-i18n-views (~> 0.3.7)
   factory_bot_rails (~> 6.0)
+  faker (~> 2.13)
   jbuilder (~> 2.7)
   jquery-rails (~> 4.4)
   kaminari
