@@ -66,15 +66,13 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: host }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  # Sendgrid for heroku
   config.action_mailer.smtp_settings = {
-    :address => 'smtp.sendgrid.net',
-    :domain => 'heroku.com',
+    :address => 'smtp.gmail.com',
+    :domain => 'gmail.com',
     :port => 587,
-    :user_name => Rails.application.credentials.sendgrid_username,
-    :password => Rails.application.credentials.sendgrid_password,
-    :authentication => :plain,
-    :enable_starttls_auto => true,
+    :user_name => 'ohs.potepote.camp@gmail.com',
+    :password => Rails.application.credentials.gmail[:app_password],
+    :enable_starttls_auto => true
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
