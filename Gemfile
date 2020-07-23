@@ -17,6 +17,7 @@ gem 'simple_calendar', '~> 2.4', '>= 2.4.1'
 gem 'activerecord-session_store'
 gem 'kaminari'
 gem 'kaminari-bootstrap'
+gem 'faker', '~> 2.13'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
