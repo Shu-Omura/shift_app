@@ -12,13 +12,12 @@ RSpec.describe 'CollectedShifts', type: :system do
   it 'creates collected_shifts' do
     expect do
       fill_in 'collected_shift_started_at', with: Time.current
-      fill_in 'collected_shift_finished_at', with: Time.current + 1.hour
-
+      fill_in 'collected_shift_finished_at', with: Time.current.since(1.hour)
       click_button '提出'
 
       expect(page).to have_content 'シフトを提出しました'
     end.to change(CollectedShift, :count).by(1)
-
+    
     visit user_path(user)
 
     expect(page).to have_content CollectedShift.count
@@ -27,21 +26,18 @@ RSpec.describe 'CollectedShifts', type: :system do
 
   it 'updates collected_shifts' do
     expect(page).to have_content collected_shift.started_at.strftime('%H:%M')
-
-    within '.has-events' do
-      find('a').click
-    end
+    within('.has-events') { find('a').click }
 
     expect(current_path).to eq edit_collected_shift_path(collected_shift)
 
-    fill_in 'collected_shift_started_at', with: Time.current + 1.hour
-
+    fill_in 'collected_shift_started_at', with: Time.current.since(1.hour)
     click_button '変更する'
 
     expect(current_path).to eq user_path(user)
     expect(page).to have_content 'シフトを更新しました'
     # テスト中での時間差が影響しないよう分単位で比較
-    expect(collected_shift.reload.started_at.strftime('%H:%M')).to eq Time.current.since(1.hour).strftime('%H:%M')
+    expect(collected_shift.reload.started_at.strftime('%H:%M'))
+      .to eq Time.current.since(1.hour).strftime('%H:%M')
   end
 
   it 'deletes collected_shifts', js: true do

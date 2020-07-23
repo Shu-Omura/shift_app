@@ -40,9 +40,7 @@ RSpec.describe 'Users', type: :system do
         expect(page).to have_content '管理者'
         expect(page).to have_content admin_user.base_salary
 
-        within 'table' do
-          click_link admin_user.name
-        end
+        within('table') { click_link admin_user.name }
 
         expect(current_path).to eq user_path(admin_user)
       end
@@ -78,7 +76,6 @@ RSpec.describe 'Users', type: :system do
 
         expect(current_path).to eq users_path
         expect(page).to have_content 'ユーザー情報を更新しました'
-
         expect(admin_user.reload.admin).to be false
       end
     end

@@ -10,7 +10,6 @@ RSpec.describe 'AuthenticateUsers', type: :system do
       it 'signs up' do
         expect(page).to have_link '新規登録'
         expect(page).to have_link 'ログイン'
-
         find('.top-form').click_link '新規登録'
 
         expect(current_path).to eq new_user_registration_path
@@ -73,7 +72,6 @@ RSpec.describe 'AuthenticateUsers', type: :system do
       it 'deletes my account', js: true do
         expect do
           expect(page).to have_link 'アカウントを削除する'
-    
           click_link 'アカウントを削除する'
           page.driver.browser.switch_to.alert.accept
     

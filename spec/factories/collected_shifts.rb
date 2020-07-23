@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :collected_shift do
-    started_at { Time.current + 1.day }
-    finished_at { started_at + 1.hour }
+    started_at { Time.current.since(1.day) }
+    finished_at { started_at.since(1.hour) }
     is_determined { [true, false].sample }
 
     factory :determined_shift do
@@ -14,8 +14,8 @@ FactoryBot.define do
     end
 
     factory :collected_shift_2 do
-      started_at { Time.current + 2.days }
-      finished_at { Time.current + 2.days + 1.hour }
+      started_at { Time.current.since(2.days) }
+      finished_at { Time.current.since(2.days).since(1.hour) }
     end
   end
 end

@@ -18,7 +18,6 @@ RSpec.describe 'Companies', type: :system do
 
       expect(page).to have_content '所属会社を登録'
       expect(page).to have_link '管理者の方はこちら'
-
       click_link '管理者の方はこちら'
 
       expect(current_path).to eq new_company_path
@@ -36,7 +35,7 @@ RSpec.describe 'Companies', type: :system do
         expect(page).to have_link '会社：company'
         click_link '会社：company'
       end
-      
+
       expect(current_path).to eq company_path(Company.last)
     end
 
@@ -70,7 +69,6 @@ RSpec.describe 'Companies', type: :system do
       expect(page).to have_content company.auth_token
       expect(page).to have_link '会社情報を更新する'
       expect(page).to have_button 'トークン再生性'
-
       click_link '会社情報を更新する'
 
       expect(current_path).to eq edit_company_path(company)
@@ -82,7 +80,7 @@ RSpec.describe 'Companies', type: :system do
       expect(page).to have_content '会社情報を更新しました'
       expect(current_path).to eq company_path(company)
       expect(company.reload.address).to eq '東京都'
-
+      
       click_button 'トークン再生性'
       page.driver.browser.switch_to.alert.accept
 

@@ -14,8 +14,8 @@ RSpec.describe 'Attendances', type: :system do
     expect(current_path).to eq new_attendance_path
 
     expect do
-      fill_in 'attendance_started_at', with: Time.current - 1.day
-      fill_in 'attendance_finished_at', with: Time.current - 1.day + 1.hour
+      fill_in 'attendance_started_at', with: Time.current.ago(1.day)
+      fill_in 'attendance_finished_at', with: Time.current.ago(1.day).since(1.hour)
 
       click_button '確定する'
       expect(page).to have_content '勤怠を確定しました'
@@ -36,22 +36,23 @@ RSpec.describe 'Attendances', type: :system do
         .to eq attendance.started_at.strftime('%m/%d %H:%M')
     end
 
-    fill_in 'attendance_started_at', with: Time.current - 1.day - 1.hour
+    fill_in 'attendance_started_at', with: Time.current.ago(1.day).ago(1.hour)
     click_button '変更する'
 
     expect(current_path).to eq user_path(user)
     expect(page).to have_content '勤怠を変更しました'
-    expect(attendance.reload.started_at.strftime('%H:%M')).to eq Time.current.ago(1.hour).strftime('%H:%M')
+    expect(attendance.reload.started_at.strftime('%H')).to eq Time.current.ago(1.hour).strftime('%H')
   end
 
   it 'deletes attendances', js: true do
     visit edit_attendance_path(attendance)
+    
     expect do
       click_link '削除する'
       page.driver.browser.switch_to.alert.accept
       
-      expect(current_path).to eq user_path(user)
       expect(page).to have_content '勤怠を削除しました'
+      expect(current_path).to eq user_path(user)
     end.to change(Attendance, :count).by(-1)
   end
 end
