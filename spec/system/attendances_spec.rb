@@ -32,8 +32,8 @@ RSpec.describe 'Attendances', type: :system do
 
     expect(current_path).to eq edit_attendance_path(attendance)
     expect do
-      Time.strptime(find('#attendance_started_at').value, '%Y-%m-%dT%H:%M:%S').strftime('%m/%d %H:%M')
-        .to eq attendance.started_at.strftime('%m/%d %H:%M')
+      Time.strptime(find('#attendance_started_at').value, '%Y-%m-%dT%H:%M:%S').strftime('%m/%d %H:%M').
+        to eq attendance.started_at.strftime('%m/%d %H:%M')
     end
 
     fill_in 'attendance_started_at', with: Time.current.ago(1.day).ago(1.hour)
@@ -46,11 +46,11 @@ RSpec.describe 'Attendances', type: :system do
 
   it 'deletes attendances', js: true do
     visit edit_attendance_path(attendance)
-    
+
     expect do
       click_link '削除する'
       page.driver.browser.switch_to.alert.accept
-      
+
       expect(page).to have_content '勤怠を削除しました'
       expect(current_path).to eq user_path(user)
     end.to change(Attendance, :count).by(-1)

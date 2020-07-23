@@ -40,7 +40,7 @@ Rails.application.configure do
     :port => 587,
     :user_name => 'ohs.potepote.camp@gmail.com',
     :password => Rails.application.credentials.gmail[:app_password],
-    :enable_starttls_auto => true
+    :enable_starttls_auto => true,
   }
 
   config.action_mailer.perform_caching = false

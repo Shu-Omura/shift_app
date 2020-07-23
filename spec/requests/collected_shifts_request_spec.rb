@@ -38,8 +38,9 @@ RSpec.describe 'CollectedShifts', type: :request do
   end
 
   describe 'POST #create' do
-    let!(:collected_shift) { create(:collected_shift, user: user) }
     subject { post collected_shifts_path, params: { collected_shift: params } }
+
+    let!(:collected_shift) { create(:collected_shift, user: user) }
 
     before { sign_in user }
 
@@ -90,7 +91,7 @@ RSpec.describe 'CollectedShifts', type: :request do
       it 'returns http 302' do
         expect(response).to have_http_status(302)
       end
-      
+
       it 'redirects to users#show' do
         expect(response).to redirect_to user
       end
@@ -103,15 +104,16 @@ RSpec.describe 'CollectedShifts', type: :request do
     before { sign_in user }
 
     context 'with not determined collected_shift' do
-      let(:status) { false }
       subject { put collected_shift_path(collected_shift), params: { collected_shift: params } }
+
+      let(:status) { false }
 
       context 'as valid params' do
         let(:params) { collected_shift_params }
 
         it { is_expected.to eq 302 }
         it { is_expected.to redirect_to user }
-        it 'updates database' do      
+        it 'updates database' do
           subject
           expect(collected_shift.reload.started_at.day).to eq params[:started_at].day
         end
@@ -138,7 +140,7 @@ RSpec.describe 'CollectedShifts', type: :request do
 
       before do
         put collected_shift_path(collected_shift),
-              params: { collected_shift: collected_shift_params }
+            params: { collected_shift: collected_shift_params }
       end
 
       it 'returns http 302' do
@@ -156,9 +158,10 @@ RSpec.describe 'CollectedShifts', type: :request do
   end
 
   describe 'DELETE #destroy' do
-    let!(:collected_shift) { create(:collected_shift, is_determined: status, user: user) }
     subject { delete collected_shift_path(collected_shift) }
-    
+
+    let!(:collected_shift) { create(:collected_shift, is_determined: status, user: user) }
+
     context 'with not determined collected_shift' do
       let(:status) { false }
 
@@ -167,13 +170,13 @@ RSpec.describe 'CollectedShifts', type: :request do
 
         it { is_expected.to eq 302 }
         it { is_expected.to redirect_to user }
-        it { expect{ subject }.to change(CollectedShift, :count).by(-1) }
+        it { expect { subject }.to change(CollectedShift, :count).by(-1) }
       end
 
       context 'as guest' do
         it { is_expected.to eq 302 }
         it { is_expected.to redirect_to new_user_session_path }
-        it { expect{ subject }.not_to change(CollectedShift, :count) }
+        it { expect { subject }.not_to change(CollectedShift, :count) }
       end
     end
 
@@ -181,7 +184,7 @@ RSpec.describe 'CollectedShifts', type: :request do
       let(:status) { true }
 
       it { is_expected.to eq 302 }
-      it { expect{ subject }.not_to change(CollectedShift, :count) }
+      it { expect { subject }.not_to change(CollectedShift, :count) }
     end
   end
 end

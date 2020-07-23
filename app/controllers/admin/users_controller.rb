@@ -9,7 +9,7 @@ module Admin
     def update
       user = User.find(params[:id])
       if user.update(user_params)
-        redirect_to users_path, flash: {success: 'ユーザー情報を更新しました'}
+        redirect_to users_path, flash: { success: 'ユーザー情報を更新しました' }
       else
         render 'edit'
       end

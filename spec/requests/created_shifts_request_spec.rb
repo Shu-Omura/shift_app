@@ -37,7 +37,7 @@ RSpec.describe 'CreatedShifts', type: :request do
   describe 'POST #create' do
     subject do
       post collected_shift_created_shifts_path(collected_shift),
-                    params: { created_shift: created_shift_params }
+           params: { created_shift: created_shift_params }
     end
 
     context 'as admin_user' do
@@ -50,7 +50,7 @@ RSpec.describe 'CreatedShifts', type: :request do
         it { is_expected.to redirect_to collected_shifts_path }
         it { expect { subject }.to change(CreatedShift, :count).by(1) }
       end
- 
+
       context 'with determined collected_shift' do
         let(:status) { true }
 

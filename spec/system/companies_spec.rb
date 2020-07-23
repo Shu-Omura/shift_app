@@ -80,7 +80,7 @@ RSpec.describe 'Companies', type: :system do
       expect(page).to have_content '会社情報を更新しました'
       expect(current_path).to eq company_path(company)
       expect(company.reload.address).to eq '東京都'
-      
+
       click_button 'トークン再生性'
       page.driver.browser.switch_to.alert.accept
 

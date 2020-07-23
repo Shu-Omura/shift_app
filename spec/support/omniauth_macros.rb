@@ -6,11 +6,11 @@ module OmniauthMacros
         uid: '12345',
         info: {
           name: 'mockuser',
-          email: 'sample@test.com'
+          email: 'sample@test.com',
         },
         credentials: {
-          token: 'hogefuga'
-        }
+          token: 'hogefuga',
+        },
       }
     )
   end

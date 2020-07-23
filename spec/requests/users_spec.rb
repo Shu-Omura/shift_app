@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Users', type: :request do
   let(:user) { create(:user) }
   let(:admin_user) { create(:admin_user) }
-  let!(:user_2) { create(:user, name: 'user_2', company: company_2)}
+  let!(:user_2) { create(:user, name: 'user_2', company: company_2) }
   let(:company_2) { create(:company) }
 
   describe 'GET #index' do
@@ -54,7 +54,6 @@ RSpec.describe 'Users', type: :request do
       it 'shows users info only colleagues' do
         expect(response.body).not_to include user_2.name
       end
-
     end
   end
 

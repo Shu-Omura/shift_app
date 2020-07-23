@@ -2,7 +2,7 @@ class CollectedShiftsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_company, only: [:index]
   before_action :correct_user, only: [:edit, :update, :destroy]
-  before_action :check_is_determined, only:[:edit, :update]
+  before_action :check_is_determined, only: [:edit, :update]
 
   def index
     @users = User.colleagues(current_user)
@@ -13,7 +13,7 @@ class CollectedShiftsController < ApplicationController
   def create
     @collected_shift = current_user.collected_shifts.build(shift_params)
     if @collected_shift.save
-      redirect_to current_user, flash: {success: 'シフトを提出しました'}
+      redirect_to current_user, flash: { success: 'シフトを提出しました' }
     else
       @user = current_user
       @collected_shifts = CollectedShift.where(user: current_user)
@@ -29,7 +29,7 @@ class CollectedShiftsController < ApplicationController
   def update
     @collected_shift = CollectedShift.find(params[:id])
     if @collected_shift.update(shift_params)
-      redirect_to current_user, flash: {success: 'シフトを更新しました'}
+      redirect_to current_user, flash: { success: 'シフトを更新しました' }
     else
       render 'edit'
     end
@@ -37,7 +37,7 @@ class CollectedShiftsController < ApplicationController
 
   def destroy
     CollectedShift.find(params[:id]).destroy
-    redirect_to current_user, flash: {success: 'シフトを削除しました'}
+    redirect_to current_user, flash: { success: 'シフトを削除しました' }
   end
 
   private
@@ -53,7 +53,7 @@ class CollectedShiftsController < ApplicationController
 
   def check_is_determined
     if CollectedShift.find(params[:id]).is_determined
-      redirect_to current_user, flash: {danger: '確定済みのシフトの変更はできません'}
+      redirect_to current_user, flash: { danger: '確定済みのシフトの変更はできません' }
     end
   end
 end

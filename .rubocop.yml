@@ -18,3 +18,10 @@ Lint/UselessAssignment:
 
 RSpec/EmptyExampleGroup:
   Enabled: false
+
+Airbnb/SimpleModifierConditional:
+  Exclude:
+    - 'app/models/attendance.rb'
+    - 'app/models/collected_shift.rb'
+    - 'app/models/concerns/datetime_validators.rb'
+    - 'app/models/created_shift.rb'

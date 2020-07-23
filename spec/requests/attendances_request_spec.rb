@@ -122,15 +122,16 @@ RSpec.describe 'Attendances', type: :request do
 
     it { is_expected.to eq 302 }
     it { is_expected.to redirect_to user }
-    it 'updates database' do      
+    it 'updates database' do
       subject
       expect(attendance.reload.finished_at.min).to eq attendance_params[:finished_at].min
     end
   end
 
   describe 'DELETE #destroy' do
-    let!(:attendance_3) { create(:attendance, user: admin_user) }
     subject { delete attendance_path(delete_attendance) }
+
+    let!(:attendance_3) { create(:attendance, user: admin_user) }
 
     context 'as admin user' do
       before { sign_in admin_user }

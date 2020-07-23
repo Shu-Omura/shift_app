@@ -15,8 +15,10 @@ class CompaniesController < ApplicationController
     @company = current_user.build_company(company_params)
     if @company.save
       current_user.update(admin: true)
-      redirect_to current_user, flash: {success: '会社を新規登録しました。認証キーを従業員に配布してください',
-                                           info: "認証キーは `#{@company.auth_token}` です。会社情報より確認できます"}
+      redirect_to current_user, flash: {
+        success: '会社を新規登録しました。認証キーを従業員に配布してください',
+        info: "認証キーは `#{@company.auth_token}` です。会社情報より確認できます",
+      }
     else
       render 'new'
     end
@@ -29,7 +31,7 @@ class CompaniesController < ApplicationController
   def update
     company = Company.find(params[:id])
     if company.update(company_params_without_name)
-      redirect_to company, flash: {success: '会社情報を更新しました'}
+      redirect_to company, flash: { success: '会社情報を更新しました' }
     else
       render 'edit'
     end
@@ -38,7 +40,7 @@ class CompaniesController < ApplicationController
   def regenerate
     company = Company.find(params[:id])
     company.regenerate_auth_token
-    redirect_to company, flash: {success: '認証キーを再生性しました'}
+    redirect_to company, flash: { success: '認証キーを再生性しました' }
   end
 
   private
@@ -50,10 +52,10 @@ class CompaniesController < ApplicationController
   def company_params_without_name
     params.require(:company).permit(:address, :tel)
   end
-  
+
   def check_company
     if current_user.company
-      redirect_to current_user, flash: {danger: '既に会社情報は登録済みです'}
+      redirect_to current_user, flash: { danger: '既に会社情報は登録済みです' }
     end
   end
 

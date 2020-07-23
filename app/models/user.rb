@@ -31,9 +31,9 @@ class User < ApplicationRecord
   end
 
   def calc_total_wage(term)
-    total_hours = self.attendances_on_term(term).calc_total_hours
+    total_hours = attendances_on_term(term).calc_total_hours
     str = total_hours.match(/(.*):(.*)/)
-    total_wage = (str[1].to_i + str[2].to_f / 60) * self.base_salary
+    total_wage = (str[1].to_i + str[2].to_f / 60) * base_salary
     total_wage.floor
   end
 

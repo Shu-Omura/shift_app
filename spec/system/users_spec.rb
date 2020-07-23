@@ -21,7 +21,7 @@ RSpec.describe 'Users', type: :system do
 
         expect(page).not_to have_content user.email
         expect(page).not_to have_content '一般ユーザー'
-        expect(page).not_to have_content user.base_salary 
+        expect(page).not_to have_content user.base_salary
       end
     end
 
@@ -59,7 +59,7 @@ RSpec.describe 'Users', type: :system do
 
       it 'updates base_salary' do
         expect(current_path).to eq edit_admin_user_path(admin_user)
-        expect(page).to have_select('ユーザー区分', selected: '管理者')  
+        expect(page).to have_select('ユーザー区分', selected: '管理者')
         expect(page).to have_field '基本給', with: 1000
 
         fill_in '基本給', with: 1200

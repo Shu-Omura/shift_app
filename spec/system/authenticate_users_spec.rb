@@ -20,7 +20,7 @@ RSpec.describe 'AuthenticateUsers', type: :system do
           fill_in 'パスワード', with: 'foobar'
           fill_in 'パスワード再入力', with: 'foobar'
           click_button 'サインアップ'
-      
+
           expect(page).to have_css '.alert-info'
           expect(page).to have_content 'アカウント登録が完了しました。'
         end.to change(User, :count).by(1)
@@ -45,11 +45,11 @@ RSpec.describe 'AuthenticateUsers', type: :system do
         expect(current_path).to eq edit_user_registration_path
         expect(page).to have_field 'ユーザー名', with: user.name
         expect(page).to have_field 'メールアドレス', with: user.email
-        
+
         fill_in '現在のパスワードを確認', with: 'password'
         fill_in 'ユーザー名', with: 'Updated Name'
         click_button '変更を保存'
-        
+
         expect(page).to have_content 'アカウント情報を変更しました。'
         expect(current_path).to eq user_path(user)
         expect(user.reload.name).to eq 'Updated Name'
@@ -74,7 +74,7 @@ RSpec.describe 'AuthenticateUsers', type: :system do
           expect(page).to have_link 'アカウントを削除する'
           click_link 'アカウントを削除する'
           page.driver.browser.switch_to.alert.accept
-    
+
           expect(page).to have_content 'アカウントを削除しました'
           expect(current_path).to eq root_path
         end.to change(User, :count).by(-1)

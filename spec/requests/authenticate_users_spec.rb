@@ -6,7 +6,7 @@ RSpec.describe 'AuthenticateUsers', type: :request do
   describe 'registrations' do
     describe 'GET #new' do
       context 'as authenticated user' do
-        before do 
+        before do
           sign_in user
           get new_user_registration_path
         end
@@ -19,7 +19,7 @@ RSpec.describe 'AuthenticateUsers', type: :request do
           expect(response).to redirect_to user
         end
       end
-    
+
       context 'as guest' do
         before { get new_user_registration_path }
 
@@ -79,17 +79,17 @@ RSpec.describe 'AuthenticateUsers', type: :request do
           sign_in user
           get edit_user_registration_path
         end
-  
+
         it 'returns http 200' do
           expect(response).to have_http_status(200)
         end
-  
+
         it 'shows user' do
           expect(response.body).to include user.name
           expect(response.body).to include user.email
         end
       end
-    
+
       context 'as guest' do
         before { get edit_user_registration_path }
 
@@ -103,40 +103,42 @@ RSpec.describe 'AuthenticateUsers', type: :request do
       let(:user_2) { create(:user, email: 'sample@test.com') }
 
       before { sign_in user_2 }
-      
+
       context 'when update name' do
-        let(:user_params) { attributes_for(:user,
-                                           email: 'sample@test.com',
-                                           name: 'New Name',
-                                           current_password: password) }
-        
+        let(:user_params) do
+          attributes_for(:user,
+                         email: 'sample@test.com',
+                         name: 'New Name',
+                         current_password: password)
+        end
+
         context 'as valid params(with current_password)' do
           let(:password) { 'password' }
 
           before { put user_registration_path, params: { user: user_params } }
-  
+
           it 'returns http 302' do
             expect(response).to have_http_status(302)
           end
-  
+
           it 'redirects to #show' do
             expect(response).to redirect_to user_2
           end
-  
+
           it 'updates database' do
             expect(user_2.reload.name).to eq 'New Name'
           end
         end
-  
+
         context 'as invalid params(without current_password)' do
           let(:password) { '' }
 
           before { put user_registration_path, params: { user: user_params } }
-  
+
           it 'returns http 200' do
             expect(response).to have_http_status(200)
           end
-  
+
           it 'shows error messages' do
             expect(response.body).to include '現在のパスワードを入力してください'
           end
@@ -144,13 +146,15 @@ RSpec.describe 'AuthenticateUsers', type: :request do
       end
 
       context 'when update pasword' do
-        let(:user_params) { attributes_for(:user,
-                                    email: 'sample@test.com',
-                                    name: 'New Name',
-                                    password: 'newpassword',
-                                    password_confirmation: 'newpassword',
-                                    current_password: password) }
-        
+        let(:user_params) do
+          attributes_for(:user,
+                         email: 'sample@test.com',
+                         name: 'New Name',
+                         password: 'newpassword',
+                         password_confirmation: 'newpassword',
+                         current_password: password)
+        end
+
         context 'as valid params(with current_password)' do
           let(:password) { 'password' }
 
@@ -159,11 +163,11 @@ RSpec.describe 'AuthenticateUsers', type: :request do
           it 'returns http 302' do
             expect(response).to have_http_status(302)
           end
-  
+
           it 'redirects to #show' do
             expect(response).to redirect_to user_2
           end
-  
+
           it 'updates database' do
             expect(user_2.reload.valid_password?('newpassword')).to be true
           end
@@ -177,47 +181,46 @@ RSpec.describe 'AuthenticateUsers', type: :request do
           it 'returns http 200' do
             expect(response).to have_http_status(200)
           end
-  
+
           it 'shows error messages' do
             expect(response.body).to include '現在のパスワードを入力してください'
           end
         end
       end
-      
     end
 
     describe 'DELETE #destroy' do
       context 'as authenticated user' do
         before { sign_in user }
-  
+
         it 'returns http 302' do
           delete user_registration_path
           expect(response).to have_http_status(302)
         end
-  
+
         it 'redirects to root' do
           delete user_registration_path
           expect(response).to redirect_to root_url
         end
-  
+
         it 'deletes in database' do
           expect do
             delete user_registration_path
           end.to change(User, :count).by(-1)
         end
       end
-  
+
       context 'as guest' do
         it 'returns http 200' do
           delete user_registration_path
           expect(response).to have_http_status(302)
         end
-  
+
         it 'redirects to sessions#new' do
           delete user_registration_path
           expect(response).to redirect_to new_user_session_path
         end
-  
+
         it 'is not deleted in database' do
           expect do
             delete user_registration_path
@@ -234,13 +237,13 @@ RSpec.describe 'AuthenticateUsers', type: :request do
           sign_in user
           get new_user_session_path
         end
-        
+
         it 'returns http 302' do
-          expect(response).to have_http_status(302)  
+          expect(response).to have_http_status(302)
         end
-        
+
         it 'redirects to registration#show' do
-          expect(response).to redirect_to user  
+          expect(response).to redirect_to user
         end
       end
 
@@ -248,7 +251,7 @@ RSpec.describe 'AuthenticateUsers', type: :request do
         before { get new_user_session_path }
 
         it 'returns http 200' do
-          expect(response).to have_http_status(200)  
+          expect(response).to have_http_status(200)
         end
       end
     end
@@ -260,7 +263,7 @@ RSpec.describe 'AuthenticateUsers', type: :request do
       before { post user_session_path, params: { user: user_params } }
 
       it 'returns http 302' do
-        expect(response).to have_http_status(302)  
+        expect(response).to have_http_status(302)
       end
 
       it 'redirects to registration#show' do
@@ -269,7 +272,7 @@ RSpec.describe 'AuthenticateUsers', type: :request do
 
       it 'shows flash message' do
         get user_path(user_2)
-        expect(response.body).to include 'ログインしました。'  
+        expect(response.body).to include 'ログインしました。'
       end
     end
 
@@ -280,16 +283,16 @@ RSpec.describe 'AuthenticateUsers', type: :request do
       end
 
       it 'returns http 302' do
-        expect(response).to have_http_status(302)  
+        expect(response).to have_http_status(302)
       end
 
       it 'redirect_to root' do
-        expect(response).to redirect_to root_url  
+        expect(response).to redirect_to root_url
       end
 
       it 'shows flash message' do
         get root_url
-        expect(response.body).to include 'ログアウトしました。'  
+        expect(response.body).to include 'ログアウトしました。'
       end
     end
   end
@@ -301,12 +304,12 @@ RSpec.describe 'AuthenticateUsers', type: :request do
 
     it 'returns http 302' do
       get user_facebook_omniauth_callback_path
-      expect(response).to have_http_status(302)  
+      expect(response).to have_http_status(302)
     end
 
     it 'redirects to #show' do
       get user_facebook_omniauth_callback_path
-      expect(response).to redirect_to User.last 
+      expect(response).to redirect_to User.last
     end
 
     context 'when user is not exist' do
@@ -322,7 +325,7 @@ RSpec.describe 'AuthenticateUsers', type: :request do
       let!(:user_2) { create(:user, name: 'mockuser', email: 'sample@test.com', uid: '12345', provider: 'facebook') }
 
       it 'does not save in database' do
-        expect do  
+        expect do
           get user_facebook_omniauth_callback_path
         end.not_to change(User, :count)
       end

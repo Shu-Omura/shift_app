@@ -30,7 +30,7 @@ RSpec.describe 'Companies', type: :request do
       it { expect(response).to redirect_to root_url }
     end
   end
-  
+
   describe 'GET #new' do
     context 'as already registrated user' do
       before do
@@ -67,7 +67,7 @@ RSpec.describe 'Companies', type: :request do
 
     context 'as not registared user' do
       let(:user_2) { create(:user, company: nil) }
-      
+
       before { sign_in user_2 }
 
       it { is_expected.to eq 302 }
@@ -87,7 +87,7 @@ RSpec.describe 'Companies', type: :request do
 
   describe 'GET #edit' do
     context 'as admin user' do
-      before do 
+      before do
         sign_in admin_user
         get edit_company_path(company)
       end
@@ -97,7 +97,7 @@ RSpec.describe 'Companies', type: :request do
     end
 
     context 'as general user' do
-      before do 
+      before do
         sign_in user
         get edit_company_path(company)
       end
@@ -134,8 +134,9 @@ RSpec.describe 'Companies', type: :request do
   end
 
   describe 'POST #regenerate' do
-    let!(:auth_token) { company.auth_token }
     subject { post regenerate_company_path(company) }
+
+    let!(:auth_token) { company.auth_token }
 
     context 'as admin user' do
       before { sign_in admin_user }
