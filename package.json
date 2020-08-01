@@ -2,6 +2,8 @@
   "name": "shuapp",
   "private": true,
   "dependencies": {
+    "@fullcalendar/core": "^5.2.1",
+    "@fullcalendar/daygrid": "^5.2.0",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
