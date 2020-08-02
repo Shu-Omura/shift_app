@@ -5,7 +5,8 @@
 「シフトの回収」→「作成」→「勤怠」→「給与」まで一括して管理できます。
 
 # DEMO
-
+[demo_2](https://github.com/Shu-Omura/shift_app/blob/images/public/demo_2.png)
+[demo_1](https://github.com/Shu-Omura/shift_app/blob/images/public/demo_1.png)
 
 # Features
 
