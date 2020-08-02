@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   root 'statics#top'
+  get 'statics/privacy', to: 'statics#privacy'
+  get 'statics/support', to: 'statics#support'
+  get 'statics/support', to: 'statics#support'
+  get 'statics/overview', to: 'statics#overview'
   devise_for :users, controllers: {
     confirmations: 'users/confirmations',
     registrations: 'users/registrations',
