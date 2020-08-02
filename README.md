@@ -25,17 +25,7 @@
 ```bash
 git clone https://github.com/Shu-Omura/shift_app.git
 cd shift_app
-```
-Docker環境の立ち上げ
-```bash
 docker-compose up --build
-```
-```bash
-bundle exec rails db:migrate
-```
-サンプルデータを確認したい場合
-```bash
-bundle exec rails db:seed
 ```
 # Author
 

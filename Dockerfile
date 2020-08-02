@@ -2,7 +2,8 @@ FROM ruby:2.7.1
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt update -qq \
-    && apt install -y nodejs yarn vim
+    && apt install -y nodejs yarn vim \
+    && yarn install
 # chromeの追加
 RUN apt-get update && apt-get install -y unzip && \
     CHROME_DRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE` && \
