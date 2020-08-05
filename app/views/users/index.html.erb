@@ -1,5 +1,6 @@
-<div class="row">
-  <div class="wrapper col-md-10 col-md-offset-1 all-staffs-table">
+<div class="row wrapper">
+  <%= render 'shared/sidebar' %>
+  <div class="col-md-8 col-md-offset-1 all-staffs-table">
     <h2>スタッフ一覧</h2>
     <% if current_user.admin? %>
       <table>
@@ -13,7 +14,7 @@
         <% @users.each do |user| %>
           <tr class="staff-profile">
             <td><%= link_to user.name, user %></td>
-            <td><%= link_to user.admin? ? "管理者" : "一般ユーザー", edit_admin_user_path(user) %></td>
+            <td><%= link_to user.admin? ? '管理者' : '一般ユーザー', edit_admin_user_path(user) %></td>
             <td><%= user.email %></td>
             <td><%= user.base_salary %> /h</td>
             <td><%= user.attendances_in_this_month.size %> 日</td>
@@ -34,7 +35,7 @@
 </div>
 <% if current_user.admin? %>
   <div class="row">
-    <div class="col-md-offset-1 col-md-11 explanation">
+    <div class="col-md-offset-3 col-md-8 explanation">
       <p><strong>ユーザー区分</strong>の更新および、<strong>基本給</strong>の更新は区分リンクから行ってください。</p>
       <p>スタッフ名リンクより、スタッフページに移動できます。スタッフの<strong>シフト提出状況・勤怠詳細</strong>が確認できます。</p>
     </div>

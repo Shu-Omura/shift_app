@@ -1,5 +1,6 @@
-<div class="wrapper">
-  <div class="col-md-10 col-md-offset-1 all-staffs-table">
+<div class="row wrapper">
+  <%= render 'shared/sidebar' %>
+  <div class="col-md-8 col-md-offset-1 all-staffs-table">
     <h2>勤怠実績</h2>
     <div><%= render 'search', all_terms: @all_terms %></div>
     <table>

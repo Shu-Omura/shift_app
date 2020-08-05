@@ -1,42 +1,25 @@
-<%= render "shared/error_messages", resource: @created_shift %>
-<div class="wrapper">
-  <div class="row">
-    <div class="col-md-10 col-md-offset-1 all-staffs-table">
-      <h2>全社員シフト</h2>
-      <%= month_calendar events: @collected_shifts do |date, shifts| %>
-        <%= date %>
-        <% shifts.each do |shift| %>
+<%= render 'shared/error_messages', resource: @created_shift %>
 
-          <% links = capture do %>
-            <%= shift.user.name %>: 
-            <%= l shift.started_at %> -
-            <%= l shift.finished_at %>
-          <% end %>
+<div class="row wrapper">
+  <%= render 'shared/sidebar' %>
+  <div class="col-md-7 col-md-offset-1 all-staffs-table">
+    <h2>全社員シフト</h2>
+    <%= month_calendar events: @collected_shifts do |date, shifts| %>
+      <%= date %>
+      <% shifts.each do |shift| %>
 
-          <% if current_user.admin? && shift.is_determined == false %>
-            <%= link_to links, collected_shift_created_shifts_path(shift), method: :post, data: { confirm: "確定しますか？" } %>
-          <% else %>
-            <a><%= links %></a>
-          <% end %>
+        <% links = capture do %>
+          <%= shift.user.name %>: 
+          <%= l shift.started_at %> -
+          <%= l shift.finished_at %>
+        <% end %>
+
+        <% if current_user.admin? && shift.is_determined == false %>
+          <%= link_to links, collected_shift_created_shifts_path(shift), method: :post, data: { confirm: "確定しますか？" } %>
+        <% else %>
+          <a><%= links %></a>
         <% end %>
       <% end %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-10 col-md-offset-1 all-staffs-table lower-table">
-      <h2>スタッフ別</h2>
-      <table>
-        <tr>
-          <th>スタッフ名</th>
-          <th>出勤予定日数</th>
-        </tr>
-        <% @users.each do |user| %>
-          <tr>
-            <td><%= user.name %></td>
-            <td><%= user.collected_shifts.size %></td>
-          </tr>
-        <% end %>
-      </table>
-    </div>
+    <% end %>
   </div>
 </div>

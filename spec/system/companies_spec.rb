@@ -31,16 +31,14 @@ RSpec.describe 'Companies', type: :system do
         expect(current_path).to eq user_path(user)
       end.to change(Company, :count).by(1)
 
-      within 'header' do
-        expect(page).to have_link '会社：company'
-        click_link '会社：company'
-      end
+      expect(page).to have_link '会社：company'
+      click_link '会社：company'
 
       expect(current_path).to eq company_path(Company.last)
     end
 
     it 'registrates company' do
-      within('header') { expect(page).to have_content '会社：未登録' }
+      expect(page).to have_content '会社：未登録'
       click_link '所属を登録する'
 
       fill_in '会社名', with: company.name
@@ -51,10 +49,8 @@ RSpec.describe 'Companies', type: :system do
       expect(current_path).to eq user_path(user)
       expect(user.reload.company).to eq company
 
-      within 'header' do
-        expect(page).to have_content "会社：#{company.name}"
-        expect(page).not_to have_link "会社：#{company.name}"
-      end
+      expect(page).to have_content "会社：#{company.name}"
+      expect(page).not_to have_link "会社：#{company.name}"
     end
   end
 
@@ -65,11 +61,10 @@ RSpec.describe 'Companies', type: :system do
     end
 
     it 'updates company info', js: true do
-      expect(page).to have_content company.name
+      expect(page).to have_link company.name
       expect(page).to have_content company.auth_token
-      expect(page).to have_link '会社情報を更新する'
       expect(page).to have_button 'トークン再生性'
-      click_link '会社情報を更新する'
+      click_link company.name
 
       expect(current_path).to eq edit_company_path(company)
       expect(page).to have_field '会社名', with: company.name

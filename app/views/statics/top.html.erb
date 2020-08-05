@@ -6,6 +6,7 @@
     <% else %>
       <%= link_to 'ログイン', new_user_session_path, class: 'form-control btn dark' %>
       <%= link_to '新規登録', new_user_registration_path, class: 'form-control btn light' %>
+      <%= button_to 'テストユーザー', new_user_session_path(user: { email: 'sample@test.com', password: 'foobar' }), class: 'form-control btn light' %>
     <% end %>
   </div>
 </div>

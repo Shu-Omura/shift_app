@@ -7,9 +7,7 @@ RSpec.describe 'CreatedShifts', type: :system do
   before { sign_in admin_user }
 
   it 'creates created_shifts as admin_user', js: true do
-    visit root_path
-
-    expect(page).to have_content '確定シフト'
+    visit user_path(admin_user)
     click_link '社員シフト一覧'
 
     expect(page).to have_content collected_shift.user.name

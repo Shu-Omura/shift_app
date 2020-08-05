@@ -28,9 +28,7 @@ RSpec.describe 'AuthenticateUsers', type: :system do
         expect(current_path).to eq user_path(User.last)
         expect(page).to have_content 'Sample User'
         expect(page).to have_link 'アカウント設定'
-        expect(page).to have_link '社員シフト一覧'
-        expect(page).to have_link '勤怠を入力する'
-        expect(page).to have_button '提出'
+        expect(page).to have_button 'シフト新規作成'
       end
     end
 
@@ -38,7 +36,7 @@ RSpec.describe 'AuthenticateUsers', type: :system do
       before do
         sign_in user
         visit user_path(user)
-        find('.left-side-bar').click_link 'アカウント設定'
+        find('.left-sidebar').click_link 'アカウント設定'
       end
 
       it 'updates name' do

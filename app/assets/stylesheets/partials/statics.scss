@@ -12,27 +12,30 @@
   }
 }
 
+$dark-color: rgba(167, 167, 167, 0.9);
 .dark {
   margin-bottom: 10px;
   font-weight: bold;
   color: white;
-  background-color: rgba(167, 167, 167, 0.9);
+  background-color: $dark-color;
   &:hover {
-    background-color: rgba(143, 141, 141, 0.9);
+    background-color: darken($dark-color, 10%);
     color: white;
   }
 }
 
 .light {
+  margin-bottom: 10px;
   font-weight: bold;
-  color: rgb(255, 255, 255);
-  background-color: #4885ed;
+  color: white;
+  background-color: darken($main-color, 5%);
   &:hover {
-    background-color: #2659b1;
+    background-color: darken($main-color, 10%);
     color: white;
   }
 }
 
+// privacy, support, overview
 .statics {
   margin: 30px;
   text-align: left;

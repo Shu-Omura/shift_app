@@ -18,3 +18,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   calendar.render();
 });
+
+$(function() {
+  $('#open-modal').click(function() {
+    $('#modal-area').fadeIn();
+  });
+  $('#modal-bg').click(function() {
+    $('#modal-area').fadeOut();
+  });
+});

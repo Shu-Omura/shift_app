@@ -1,33 +1,41 @@
-<%= render "shared/error_messages", resource: @collected_shift %>
+<%= render 'shared/error_messages', resource: @collected_shift %>
+
 <div class="wrapper right-side-wrapper">
   <div class="row">
-    <div class="col-md-3 links left-side-bar">
+    <div class="col-md-2 sidebar left-sidebar">
       <span class="gravatar"><%= gravatar_for @user %></span>
-      <h3><%= @user.name %></h3>
-      <p><strong>出勤予定回数：<%= @collected_shifts.size %>回</strong></p>
-      <p><strong>今月の出勤実績：<%= @attendances.in_this_month.size %>回</strong></p>
-      <p><%= link_to 'アカウント設定', edit_user_registration_path %></p>
-      <p><%= link_to '社員シフト一覧', collected_shifts_path %></p>
-      <p><%= link_to '勤怠を入力する', new_attendance_path %></p>
-      <h3><strong>シフト新規作成</strong></h3>
-      <%= form_with(model: @collected_shift, local: true) do |f| %>
-
-        <div class="field form-group">
-          <%= f.label :started_at, class: "form-group" %>
-          <%= f.datetime_field :started_at, class: "form-control" %>
-        </div>
-
-        <div class="field form-group">
-          <%= f.label :finished_at, class: "form-group" %>
-          <%= f.datetime_field :finished_at, class: "form-control" %>
-        </div>
-
-        <div class="actions">
-          <%= f.submit "提出", class: "form-control light" %>
-        </div>
+      <li><%= link_to @user.name, @user %></li>
+      <li><strong>出勤予定回数：<%= @collected_shifts.size %>回</strong></li>
+      <li><strong>今月の出勤実績：<%= @attendances.in_this_month.size %>回</strong></li>
+      <li><%= link_to 'アカウント設定', edit_user_registration_path %></li>
+      <% if @user.company %>
+        <li><%= link_to '社員シフト一覧', collected_shifts_path %></li>
+        <li><%= link_to '勤怠を入力する', new_attendance_path %></li>
       <% end %>
+      <li><button id="open-modal" class="btn btn-default">シフト新規作成</button></li>
+      <!-- モーダルエリア -->
+      <div id="modal-area">
+        <div id="modal-bg"></div>
+        <div class="modal-wrapper">
+          <div id="modal-content">
+            <%= form_with(model: @collected_shift, local: true) do |f| %>  
+              <div class="field form-group">
+                <%= f.label :started_at, class: "form-group" %>
+                <%= f.datetime_field :started_at, class: "form-control" %>
+              </div>
+              <div class="field form-group">
+                <%= f.label :finished_at, class: "form-group" %>
+                <%= f.datetime_field :finished_at, class: "form-control" %>
+              </div>
+              <div class="actions">
+                <%= f.submit "提出", class: "form-control light" %>
+              </div>
+            <% end %>
+          </div>    
+        </div>
+      </div>
     </div>
-    <div class="col-md-7 col-md-offset-1 table-area">
+    <div class="col-md-6 col-md-offset-1 table-area">
       <h2>提出済みシフト</h2>
       <%= month_calendar events: @collected_shifts do |date, shifts| %>
         <%= date %>
@@ -41,10 +49,10 @@
         <% end %>
       <% end %>
     </div>
+    <%= render 'shared/sidebar' %>
   </div>
   <div class="row">
-    <div class="col-md-3 links"></div>
-    <div class="col-md-7 col-md-offset-1 table-area">
+    <div class="col-md-6 col-md-offset-3 table-area">
       <h2>今月の勤怠</h2>
       <table>
         <tr>
