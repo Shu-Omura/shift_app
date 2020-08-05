@@ -17,7 +17,7 @@ class CollectedShiftsController < ApplicationController
     else
       @user = current_user
       @collected_shifts = CollectedShift.where(user: current_user)
-      @attendances = Attendance.where(user: current_user).recent.page(params[:page]).per(PER)
+      @attendances = Attendance.where(user: current_user).in_this_month.recent
       render 'users/show'
     end
   end

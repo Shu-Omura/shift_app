@@ -1,5 +1,4 @@
-<div class="row wrapper">
-  <%= render 'shared/sidebar' %>
+<div class="wrapper">
   <div class="col-md-8 col-md-offset-1 all-staffs-table">
     <h2>勤怠実績</h2>
     <div><%= render 'search', all_terms: @all_terms %></div>
@@ -13,7 +12,7 @@
         <th>勤務実績詳細</th>
       </tr>
       <% @users.each do |user| %>
-        <tr>
+        <tr class="attendance-list">
           <td><%= user.name %></td>
           <td><%= user.base_salary %> /h</td>
           <td><%= user.attendances_on_term(@term).size %></td>
@@ -26,9 +25,26 @@
             <td></td>
             <td></td>
           <% end %>
-          <td><%= link_to "実績詳細", user_path(user) %></td>
+          <td><%= link_to "実績詳細", attendances_path(id: user.id, term: @term) %></td>
         </tr>
       <% end %>
     </table>
   </div>
 </div>
+
+<% if @user_attendances.present? %>
+  <div class="row user_attendances">
+    <div class="col-md-8 col-md-offset-3">
+      <h4><%= @user_attendances.take.user.name %></h4>
+      <table>
+        <% @user_attendances.each do |attendance| %>
+          <tr>
+            <td><%= l attendance.started_at, format: :full %></td>
+            <td><%= l attendance.finished_at, format: :full %></td>
+            <td><%= link_to "編集する", edit_attendance_path(attendance) %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+<% end %>

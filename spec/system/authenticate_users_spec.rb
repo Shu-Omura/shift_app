@@ -54,9 +54,9 @@ RSpec.describe 'AuthenticateUsers', type: :system do
       end
 
       it 'updates password' do
-        expect(page).to have_link 'パスワードを変更する'
+        expect(page).to have_link 'パスワードの変更'
 
-        click_link 'パスワードを変更する'
+        click_link 'パスワードの変更'
         fill_in '現在のパスワードを確認', with: 'password'
         fill_in '新しいパスワード', with: 'newpass'
         fill_in '新しいパスワード再確認', with: 'newpass'
@@ -69,8 +69,8 @@ RSpec.describe 'AuthenticateUsers', type: :system do
 
       it 'deletes my account', js: true do
         expect do
-          expect(page).to have_link 'アカウントを削除する'
-          click_link 'アカウントを削除する'
+          expect(page).to have_link 'アカウントを削除'
+          click_link 'アカウントを削除'
           page.driver.browser.switch_to.alert.accept
 
           expect(page).to have_content 'アカウントを削除しました'
@@ -96,7 +96,7 @@ RSpec.describe 'AuthenticateUsers', type: :system do
       expect(current_path).to eq user_path(user)
       expect(page).to have_content user.name
       expect(page).to have_link 'アカウント設定'
-      expect(page).to have_link '社員シフト一覧'
+      expect(page).to have_link 'スタッフシフト一覧'
       expect(page).to have_link '勤怠を入力する'
       expect(page).to have_button '提出'
 

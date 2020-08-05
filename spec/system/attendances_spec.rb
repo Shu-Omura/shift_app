@@ -24,11 +24,11 @@ RSpec.describe 'Attendances', type: :system do
     visit user_path(user)
 
     expect(page).to have_content Attendance.last.started_at.strftime('%m/%d %H:%M')
-    expect(page).to have_content Attendance.last.finished_at.strftime('%m/%d %H:%M')
+    expect(page).to have_content Attendance.last.finished_at.strftime('%H:%M')
   end
 
   it 'updates attendances' do
-    click_link '編集する'
+    find('.attendance-list').click
 
     expect(current_path).to eq edit_attendance_path(attendance)
     expect do

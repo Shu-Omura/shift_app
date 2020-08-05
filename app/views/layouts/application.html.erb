@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head>
-    <title>Shuapp</title>
+    <title>ShiftAPP</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  
   <body>
     <%= render 'layouts/header' %>
     <div class="container-fluid">
       <% flash.each do |message_type, message| %>
         <%= content_tag(:div, message, class:"alert alert-#{bootstrap_class_for(message_type)}") %>
       <% end %>
+      <%= render 'shared/sidebar' %>
       <%= yield %>
     </div>
   </body>

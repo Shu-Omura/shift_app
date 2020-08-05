@@ -7,6 +7,7 @@ class AttendancesController < ApplicationController
     @users = User.colleagues(current_user)
     @all_terms = Attendance.all_terms
     @term = params[:term] || Time.current.strftime('%Y/%m')
+    @user_attendances = User.find_by(id: params[:id])&.attendances_on_term(@term)
   end
 
   def new

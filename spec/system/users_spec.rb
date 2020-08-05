@@ -39,10 +39,6 @@ RSpec.describe 'Users', type: :system do
         expect(page).to have_content admin_user.email
         expect(page).to have_content '管理者'
         expect(page).to have_content admin_user.base_salary
-
-        within('table') { click_link admin_user.name }
-
-        expect(current_path).to eq user_path(admin_user)
       end
     end
   end

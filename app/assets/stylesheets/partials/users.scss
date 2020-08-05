@@ -87,6 +87,28 @@
   @include table-design;
   margin-top: 5px;
   }
+  .user-attendance {
+    h4 {
+      margin-top: 18px;
+    }
+    li {
+      width: 100%;
+      margin: 10px 0;
+      padding: 6px 5px;
+      text-align: center !important;
+      box-shadow: 1px 1px 10px rgb(182, 182, 182);
+      border-radius: 4px;
+      background-color: white;
+      font-size: 15px;
+      color: black;
+      &:hover {
+        background-color: #d8d7d7;
+      }
+    }
+    a:hover {
+      text-decoration: none;
+    }
+  }
 }
 
 // users#index, collected_shifts#index, created_shifts#index

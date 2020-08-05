@@ -1,7 +1,11 @@
 // top
 .top-page {
-  background-image: url('clocks.jpg');
-  background-size: cover;
+  background-image: url('people.png');
+  background-repeat: no-repeat;
+  background-size: 70%;
+  background-position: bottom;
+  
+
   height: 715px;
   .top-form {
     box-shadow: 5px 5px 15px gray;

@@ -1,7 +1,6 @@
 <%= render 'shared/error_messages', resource: @created_shift %>
 
-<div class="row wrapper">
-  <%= render 'shared/sidebar' %>
+<div class="wrapper">
   <div class="col-md-7 col-md-offset-1 all-staffs-table">
     <h2>全社員シフト</h2>
     <%= month_calendar events: @collected_shifts do |date, shifts| %>

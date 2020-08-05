@@ -8,7 +8,7 @@ RSpec.describe 'CreatedShifts', type: :system do
 
   it 'creates created_shifts as admin_user', js: true do
     visit user_path(admin_user)
-    click_link '社員シフト一覧'
+    click_link 'スタッフシフト一覧'
 
     expect(page).to have_content collected_shift.user.name
     expect(page).to have_content collected_shift.started_at.strftime('%H:%M')

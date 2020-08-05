@@ -4,6 +4,7 @@ require("@rails/activestorage").start()
 require("channels")
 require("jquery")
 require("bootstrap")
+require("./custom")
 
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -17,13 +18,4 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   calendar.render();
-});
-
-$(function() {
-  $('#open-modal').click(function() {
-    $('#modal-area').fadeIn();
-  });
-  $('#modal-bg').click(function() {
-    $('#modal-area').fadeOut();
-  });
 });

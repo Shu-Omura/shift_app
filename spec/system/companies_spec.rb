@@ -13,8 +13,8 @@ RSpec.describe 'Companies', type: :system do
 
     it 'creates company as owner' do
       within('header') { expect(page).not_to have_link '会社：company' }
-      expect(page).to have_link '所属を登録する'
-      click_link '所属を登録する'
+      expect(page).to have_link '所属を登録'
+      click_link '所属を登録'
 
       expect(page).to have_content '所属会社を登録'
       expect(page).to have_link '管理者の方はこちら'
@@ -39,7 +39,7 @@ RSpec.describe 'Companies', type: :system do
 
     it 'registrates company' do
       expect(page).to have_content '会社：未登録'
-      click_link '所属を登録する'
+      click_link '所属を登録'
 
       fill_in '会社名', with: company.name
       fill_in '認証キー', with: company.auth_token
