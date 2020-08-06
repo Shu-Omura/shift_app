@@ -28,7 +28,6 @@ RSpec.describe 'AuthenticateUsers', type: :system do
         expect(current_path).to eq user_path(User.last)
         expect(page).to have_content 'Sample User'
         expect(page).to have_link 'アカウント設定'
-        expect(page).to have_button 'シフト新規作成'
       end
     end
 
