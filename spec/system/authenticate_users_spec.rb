@@ -97,7 +97,7 @@ RSpec.describe 'AuthenticateUsers', type: :system do
       expect(page).to have_content user.name
       expect(page).to have_link 'アカウント設定'
       expect(page).to have_link 'スタッフシフト一覧'
-      expect(page).to have_link '勤怠を入力する'
+      expect(page).to have_button '勤怠を入力する'
       expect(page).to have_button '提出'
 
       click_link 'ログアウト'

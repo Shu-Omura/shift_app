@@ -55,10 +55,11 @@ RSpec.describe 'CollectedShifts', type: :request do
     context 'as invalid params' do
       let(:params) { invalid_collected_shift_params }
 
-      it { is_expected.to eq 200 }
+      it { is_expected.to eq 302 }
       it { expect { subject }.not_to change(CollectedShift, :count) }
       it 'shows error messages' do
         subject
+        get user_path(user)
         expect(response.body).to include '退勤時刻を入力してください'
       end
     end

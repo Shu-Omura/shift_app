@@ -1,37 +1,22 @@
-<%= render 'shared/error_messages', resource: @collected_shift %>
-
 <div class="wrapper right-side-wrapper">
   <div class="row">
     <div class="col-md-2 sidebar left-sidebar">
       <li><%= link_to 'アカウント設定', edit_user_registration_path %></li>
       <li><%= link_to 'パスワードの変更', edit_user_registration_path(path: 'edit_password') %></li>
       <% if current_user.company %>
-        <li><%= link_to '勤怠を入力する', new_attendance_path %></li>
+        <li><button id="attendance-open-modal" class="btn btn-default">勤怠を入力する</button></li>
       <% else %>
         <li><%= link_to '所属を登録する', edit_user_registration_path(path: 'edit_company') %></li>
       <% end %>
-      <li><button id="open-modal" class="btn btn-default">シフト新規作成</button></li>
+      <li><button id="collected-shift-open-modal" class="btn btn-default">シフト新規作成</button></li>
       <!-- モーダルエリア -->
-      <div id="modal-area">
-        <div id="modal-bg"></div>
-        <div class="modal-wrapper">
-          <div id="modal-content">
-            <%= form_with(model: @collected_shift, local: true) do |f| %>  
-              <div class="field form-group">
-                <%= f.label :started_at, class: 'form-group' %>
-                <%= f.datetime_field :started_at, class: 'form-control' %>
-              </div>
-              <div class="field form-group">
-                <%= f.label :finished_at, class: 'form-group' %>
-                <%= f.datetime_field :finished_at, class: 'form-control' %>
-              </div>
-              <div class="actions">
-                <%= f.submit '提出', class: 'form-control light' %>
-              </div>
-            <% end %>
-          </div>    
-        </div>
+      <div id="collected-shift-modal-area">
+        <%= render 'shared/modal', resource: @collected_shift %>
       </div>
+      <div id="attendance-modal-area">
+        <%= render 'shared/modal', resource: @attendance %>
+      </div>
+      <!-- 勤怠 -->
       <div class="user-attendance">
         <h4>勤怠</h4>
         <% if @attendances.present? %>
@@ -47,6 +32,7 @@
         <% end %>
       </div>
     </div>
+    <!-- テーブルエリア -->
     <div class="col-md-6 col-md-offset-1 table-area">
       <h2>提出済みシフト</h2>
       <%= month_calendar events: @collected_shifts do |date, shifts| %>

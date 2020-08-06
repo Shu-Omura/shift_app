@@ -13,7 +13,7 @@ RSpec.describe 'CollectedShifts', type: :system do
     expect do
       fill_in 'collected_shift_started_at', with: Time.current
       fill_in 'collected_shift_finished_at', with: Time.current.since(1.hour)
-      click_button '提出'
+      within('#collected-shift-modal-area') { click_button '提出' }
 
       expect(page).to have_content 'シフトを提出しました'
     end.to change(CollectedShift, :count).by(1)

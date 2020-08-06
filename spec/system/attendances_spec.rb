@@ -9,15 +9,14 @@ RSpec.describe 'Attendances', type: :system do
     visit user_path(user)
   end
 
-  it 'creates attendances' do
-    click_link '勤怠を入力する'
-    expect(current_path).to eq new_attendance_path
+  it 'creates attendances', js: true do
+    click_button '勤怠を入力する'
 
     expect do
       fill_in 'attendance_started_at', with: Time.current.ago(1.day)
       fill_in 'attendance_finished_at', with: Time.current.ago(1.day).since(1.hour)
 
-      click_button '確定する'
+      within('#attendance-modal-area') { click_button '提出' }
       expect(page).to have_content '勤怠を確定しました'
     end.to change(Attendance, :count).by(1)
 

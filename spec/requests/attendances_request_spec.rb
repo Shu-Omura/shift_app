@@ -46,17 +46,6 @@ RSpec.describe 'Attendances', type: :request do
     end
   end
 
-  describe 'GET #new' do
-    before do
-      sign_in user
-      get new_attendance_path
-    end
-
-    it 'returns http 200' do
-      expect(response).to have_http_status(200)
-    end
-  end
-
   describe 'POST #create' do
     subject { post attendances_path, params: { attendance: attendance_params } }
 

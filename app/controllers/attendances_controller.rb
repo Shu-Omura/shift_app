@@ -10,16 +10,12 @@ class AttendancesController < ApplicationController
     @user_attendances = User.find_by(id: params[:id])&.attendances_on_term(@term)
   end
 
-  def new
-    @attendance = current_user.attendances.build
-  end
-
   def create
     @attendance = current_user.attendances.build(attendance_params)
     if @attendance.save
       redirect_to current_user, flash: { success: '勤怠を確定しました' }
     else
-      render 'new'
+      redirect_to current_user, flash: { danger: @attendance.errors.full_messages.join(' / ') }
     end
   end
 

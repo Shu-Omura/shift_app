@@ -1,0 +1,18 @@
+<div class="modal-bg"></div>
+<div class="modal-wrapper">
+  <div id="modal-content">
+    <%= form_with(model: resource, local: true) do |f| %>  
+      <div class="field form-group">
+        <%= f.label :started_at, class: 'form-group' %>
+        <%= f.datetime_field :started_at, class: 'form-control' %>
+      </div>
+      <div class="field form-group">
+        <%= f.label :finished_at, class: 'form-group' %>
+        <%= f.datetime_field :finished_at, class: 'form-control' %>
+      </div>
+      <div class="actions">
+        <%= f.submit '提出', class: 'form-control light' %>
+      </div>
+    <% end %>
+  </div>    
+</div>

@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @collected_shift = current_user.collected_shifts.build
     @collected_shifts = CollectedShift.where(user: current_user)
+    @attendance = current_user.attendances.build
     @attendances = Attendance.where(user: current_user).in_this_month.recent
   end
 

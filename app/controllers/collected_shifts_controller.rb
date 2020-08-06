@@ -15,10 +15,7 @@ class CollectedShiftsController < ApplicationController
     if @collected_shift.save
       redirect_to current_user, flash: { success: 'シフトを提出しました' }
     else
-      @user = current_user
-      @collected_shifts = CollectedShift.where(user: current_user)
-      @attendances = Attendance.where(user: current_user).in_this_month.recent
-      render 'users/show'
+      redirect_to current_user, flash: { danger: @collected_shift.errors.full_messages.join(' / ') }
     end
   end
 
