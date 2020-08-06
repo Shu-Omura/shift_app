@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   get 'statics/support', to: 'statics#support'
   get 'statics/overview', to: 'statics#overview'
   devise_for :users, controllers: {
-    confirmations: 'users/confirmations',
     registrations: 'users/registrations',
     sessions: 'users/sessions',
     passwords: 'users/passwords',

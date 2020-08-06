@@ -5,32 +5,34 @@
       <li><%= link_to 'パスワードの変更', edit_user_registration_path(path: 'edit_password') %></li>
       <% if current_user.company %>
         <li><button id="attendance-open-modal" class="btn btn-default">勤怠を入力する</button></li>
+        <li><button id="collected-shift-open-modal" class="btn btn-default">シフト新規作成</button></li>
+        <!-- モーダルエリア -->
+        <div id="collected-shift-modal-area">
+          <%= render 'shared/modal', resource: @collected_shift %>
+        </div>
+        <div id="attendance-modal-area">
+          <%= render 'shared/modal', resource: @attendance %>
+        </div>
+        <!-- 勤怠 -->
+        <div class="user-attendance">
+          <h4>勤怠</h4>
+          <% if @attendances.present? %>
+            <ul>
+              <% @attendances.each do |attendance| %>
+                <%= link_to(edit_attendance_path(attendance), class: 'attendance-list') do %>
+                  <li><%= l attendance.started_at, format: :full %> → <%= l attendance.finished_at, format: :default %></li>
+                <% end %>
+              <% end %>
+            </ul>
+          <% else %>
+            <ul>
+              <h4>未登録</h4>
+            </ul>
+          <% end %>
+        </div>
       <% else %>
         <li><%= link_to '所属を登録する', edit_user_registration_path(path: 'edit_company') %></li>
       <% end %>
-      <li><button id="collected-shift-open-modal" class="btn btn-default">シフト新規作成</button></li>
-      <!-- モーダルエリア -->
-      <div id="collected-shift-modal-area">
-        <%= render 'shared/modal', resource: @collected_shift %>
-      </div>
-      <div id="attendance-modal-area">
-        <%= render 'shared/modal', resource: @attendance %>
-      </div>
-      <!-- 勤怠 -->
-      <div class="user-attendance">
-        <h4>勤怠</h4>
-        <% if @attendances.present? %>
-          <ul>
-            <% @attendances.each do |attendance| %>
-              <%= link_to(edit_attendance_path(attendance), class: 'attendance-list') do %>
-                <li><%= l attendance.started_at, format: :full %> → <%= l attendance.finished_at, format: :default %></li>
-              <% end %>
-            <% end %>
-          </ul>
-        <% else %>
-          <li>登録済みのデータはありません</li>
-        <% end %>
-      </div>
     </div>
     <!-- テーブルエリア -->
     <div class="col-md-6 col-md-offset-1 table-area">

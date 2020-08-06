@@ -1,18 +1,18 @@
 <div class="col-md-2 sidebar">
   <% if user_signed_in? %>
-    <li><%#= gravatar_for current_user %><%= link_to current_user.name, current_user %></li>
+  <li><%= link_to current_user.name, current_user %></li>
     <% if current_user.admin? %>
-      <li><%= link_to content_tag(:i, "", class: "fas fa-building fa-fw fa-lg") + " 会社：#{current_user.company.name}", company_path(current_user.company) %></li>
-      <li><%= link_to content_tag(:i, "", class: "fas fa-user-circle fa-fw fa-lg") + ' スタッフ一覧', users_path %></li>
-      <li><%= link_to content_tag(:i, "", class: "far fa-calendar-alt fa-fw fa-lg") + ' スタッフシフト一覧', collected_shifts_path %></li>
-      <li><%= link_to content_tag(:i, "", class: "far fa-calendar-alt fa-fw fa-lg") + ' 確定済みシフト', created_shifts_path %></li>
-      <li><%= link_to content_tag(:i, "", class: "fas fa-yen-sign fa-fw fa-lg") + ' 勤務実績', attendances_path %></li>
+      <li><%= link_to content_tag(:i, '', class: 'fas fa-building fa-fw fa-lg') + " 会社：#{current_user.company.name}", company_path(current_user.company) %></li>
+      <li><%= link_to content_tag(:i, '', class: 'fas fa-user-circle fa-fw fa-lg') + ' スタッフ一覧', users_path %></li>
+      <li><%= link_to content_tag(:i, '', class: 'far fa-calendar-alt fa-fw fa-lg') + ' スタッフシフト一覧', collected_shifts_path %></li>
+      <li><%= link_to content_tag(:i, '', class: 'far fa-calendar-alt fa-fw fa-lg') + ' 確定済みシフト', created_shifts_path %></li>
+      <li><%= link_to content_tag(:i, '', class: 'fas fa-yen-sign fa-fw fa-lg') + ' 勤務実績', attendances_path %></li>
     <% elsif current_user.company %>
-      <li><%= link_to content_tag(:i, "", class: "fas fa-user-circle fa-fw fa-lg") + ' スタッフ一覧', users_path %></li>
-      <li><%= link_to content_tag(:i, "", class: "far fa-calendar-alt fa-fw fa-lg") + ' スタッフシフト一覧', collected_shifts_path %></li>
-      <li><a><%= content_tag(:i, "", class: "fas fa-building fa-fw fa-lg") + " 会社：#{current_user.company.name}" %></a></li>
+      <li><%= link_to content_tag(:i, '', class: 'fas fa-user-circle fa-fw fa-lg') + ' スタッフ一覧', users_path %></li>
+      <li><%= link_to content_tag(:i, '', class: 'far fa-calendar-alt fa-fw fa-lg') + ' スタッフシフト一覧', collected_shifts_path %></li>
+      <li><a><%= content_tag(:i, '', class: 'fas fa-building fa-fw fa-lg') + " 会社：#{current_user.company.name}" %></a></li>
     <% else %>
-      <li><%= link_to content_tag(:i, "", class: "fas fa-building fa-fw fa-lg") + ' 会社：未登録', edit_user_registration_path(path: 'edit_company') %></li>
+      <li><%= link_to content_tag(:i, '', class: 'fas fa-building fa-fw fa-lg') + ' 会社：未登録', edit_user_registration_path(path: 'edit_company') %></li>
     <% end %>
   <% end %>
   <ul>

@@ -4,22 +4,22 @@
     <%= form_with(model: @company, local: true) do |f| %>
 
       <div class="field form-group">
-        <%= f.label :name, "会社名", class: "form-group" %>
-        <%= f.text_field :name, required: true, class: "form-control", readonly: true %>
+        <%= f.label :name, '会社名', class: 'form-group' %>
+        <%= f.text_field :name, required: true, class: 'form-control', readonly: true %>
       </div>
 
       <div class="field form-group">
-        <%= f.label :address, "住所", class: "form-group" %>
-        <%= f.text_field :address, class: "form-control" %>
+        <%= f.label :address, '住所', class: 'form-group' %>
+        <%= f.text_field :address, class: 'form-control' %>
       </div>
 
       <div class="field form-group">
-        <%= f.label :tel, "代表番号", class: "form-group" %>
-        <%= f.text_field :tel, class: "form-control" %>
+        <%= f.label :tel, '代表番号', class: 'form-group' %>
+        <%= f.text_field :tel, class: 'form-control' %>
       </div>
       
       <div class="actions">
-        <%= f.submit "更新する", class: "form-control light" %>
+        <%= f.submit '更新する', class: 'form-control light' %>
       </div>
     <% end %>
   </div>

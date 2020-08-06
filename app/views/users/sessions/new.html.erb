@@ -1,16 +1,16 @@
 <div class="main-wrapper">
   <div class="col-md-6">
-    <%= image_tag "main.png" %>
+    <%= image_tag 'main.png' %>
   </div>
   <div class="col-md-3 form-area">
     <h4><strong>ログイン</strong></h4>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field form-group">
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class: "form-control" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: 'email', placeholder: 'メールアドレス', class: 'form-control' %>
       </div>
 
       <div class="field form-group">
-        <%= f.password_field :password, autocomplete: "current-password", placeholder: "パスワード", class: "form-control" %>
+        <%= f.password_field :password, autocomplete: 'current-password', placeholder: 'パスワード', class: 'form-control' %>
       </div>
 
       <% if devise_mapping.rememberable? %>
@@ -21,11 +21,11 @@
       <% end %>
 
       <div class="actions">
-        <%= f.submit "ログイン", class: "form-control light" %>
+        <%= f.submit 'ログイン', class: 'form-control light' %>
       </div>
     <% end %>
     <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-      <strong><%= link_to "パスワードをお忘れですか？", new_password_path(resource_name) %></strong><br />
+      <strong><%= link_to 'パスワードをお忘れですか？', new_password_path(resource_name) %></strong><br />
     <% end %>
     <%= render 'shared/omniauth' %>
     <%= link_to '新規登録はこちら', new_user_registration_path %>

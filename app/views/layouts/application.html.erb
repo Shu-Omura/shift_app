@@ -11,7 +11,7 @@
     <%= render 'layouts/header' %>
     <div class="container-fluid">
       <% flash.each do |message_type, message| %>
-        <%= content_tag(:div, message, class:"alert alert-#{bootstrap_class_for(message_type)}") %>
+        <%= content_tag(:div, message, class: "alert alert-#{bootstrap_class_for(message_type)}") %>
       <% end %>
       <%= render 'shared/sidebar' %>
       <%= yield %>

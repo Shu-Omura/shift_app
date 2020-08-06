@@ -17,9 +17,7 @@
           <td><%= user.base_salary %> /h</td>
           <td><%= user.attendances_on_term(@term).size %></td>
           <% if user.attendances_on_term(@term).present? %>
-            <!-- @termにおける総勤務時間 -->
             <td><%= user.attendances_on_term(@term).calc_total_hours %></td>
-            <!-- @termにおける総賃金 -->
             <td><%= user.calc_total_wage(@term) %> 円</td>
           <% else %>
             <td></td>

@@ -8,7 +8,7 @@
       <% shifts.each do |shift| %>
 
         <% links = capture do %>
-          <%= shift.user.name %>: 
+          <%= shift.user.name %></br>
           <%= l shift.started_at %> -
           <%= l shift.finished_at %>
         <% end %>
