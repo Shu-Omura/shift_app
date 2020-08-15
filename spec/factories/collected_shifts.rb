@@ -11,6 +11,7 @@ FactoryBot.define do
 
     factory :non_determined do
       is_determined { false }
+      user
     end
 
     factory :collected_shift_2 do
