@@ -19,30 +19,30 @@ RSpec.describe 'Attendances', type: :model do
     end
 
     context 'as custom validation' do
-      let(:attendance_2) { build(:attendance,
-                                 started_at: started_at,
-                                 finished_at: finished_at,
-                                )
-                         }
-      
+      let(:attendance_2) do
+        build(:attendance,
+              started_at: started_at,
+              finished_at: finished_at,)
+      end
+
       context 'as validates_before_today' do
         let(:started_at) { Time.current }
         let(:finished_at) { Time.current.since(1.hour) }
-  
+
         it "is invalid with today's attendance" do
           expect(attendance_2).not_to be_valid
         end
       end
-  
+
       context 'as validates_finished_at_before_started_at' do
         let(:started_at) { Time.current.ago(1.day) }
         let(:finished_at) { started_at.ago(1.hour) }
-  
+
         it 'is invalid with finished_at before started_at' do
           expect(attendance_2).not_to be_valid
         end
       end
-  
+
       context 'as validates_over_1day' do
         let(:started_at) { Time.current.ago(2.day) }
         let(:finished_at) { started_at.since(1.day) }
@@ -96,13 +96,17 @@ RSpec.describe 'Attendances', type: :model do
     end
 
     context 'calc_total_hours' do
-      let!(:attendance_1) { create(:attendance,
-                                   started_at: Time.current.ago(1.day),
-                                   finished_at: Time.current.ago(1.day).since(1.hour)) }
-      let!(:attendance_2) { create(:attendance,
-                                   started_at: Time.current.ago(2.days),
-                                   finished_at: Time.current.ago(2.day).since(2.hours)) }
-      
+      let!(:attendance_1) do
+        create(:attendance,
+               started_at: Time.current.ago(1.day),
+               finished_at: Time.current.ago(1.day).since(1.hour))
+      end
+      let!(:attendance_2) do
+        create(:attendance,
+               started_at: Time.current.ago(2.days),
+               finished_at: Time.current.ago(2.day).since(2.hours))
+      end
+
       it 'calcs total hours' do
         expect(Attendance.calc_total_hours).to eq '03:00'
       end

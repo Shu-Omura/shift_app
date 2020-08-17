@@ -9,7 +9,7 @@ RSpec.describe 'CreatedShifts', type: :model do
         expect(created_shift).not_to be_valid
       end
     end
-    
+
     context 'with started_at and finished_at' do
       let(:start) { Time.current.tomorrow }
       let(:finish) { Time.current.tomorrow.since(1.hour) }
@@ -35,7 +35,7 @@ RSpec.describe 'CreatedShifts', type: :model do
 
     context 'finished_at before started_at' do
       let(:start) { Time.current.tomorrow.since(1.day) }
-      let(:finish) { Time.current.tomorrow}
+      let(:finish) { Time.current.tomorrow }
 
       it_behaves_like 'created_shift'
     end
@@ -96,7 +96,7 @@ RSpec.describe 'CreatedShifts', type: :model do
 
         created_shift.destroy
         expect(collected_shift.is_determined).to eq false
-      end      
+      end
     end
   end
 end
